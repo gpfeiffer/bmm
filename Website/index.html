@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMM conjecture: programs</title>
+<style>
+:root{
+  --bg:#ffffff; --fg:#1b1b1f; --muted:#5d6068; --rule:#d9dbe0; --panel:#f6f7f9; --hl:#ffe9a8; --hlstroke:#e0a800;
+  --g1:#0000bf; --g2:#cc0000; --g3:#008c00; --g4:#e67300; --g5:#6c006c; --g6:#009999; --gz:#1b1b1f; --glong:#80848c;
+  --node:#ffffff; --nodestroke:#3a3d44; --link:#0b57d0; --seed:#a100ff;
+  --cmod:#efefef; --cbar:#e3ecfa; --cgen:#e3f4e6; --sw1:#cfe0f8; --sw2:#fcd6a8; --sw3:#d9ecc9; --ok:#1e7a34; --run:#a65d00;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#16171a; --fg:#e6e6ea; --muted:#a3a6ad; --rule:#33363d; --panel:#1f2125; --hl:#5a4a12; --hlstroke:#ffcf4d;
+    --g1:#8796ff; --g2:#ff7070; --g3:#5fd35f; --g4:#ffa54d; --g5:#d98cd9; --g6:#4fd4d4; --gz:#f0f0f0; --glong:#9a9ea6;
+    --node:#1f2125; --nodestroke:#c9ccd2; --link:#8ab4f8; --seed:#b84dff;
+    --cmod:#24262a; --cbar:#1c2533; --cgen:#1b2a1f; --sw1:#22344f; --sw2:#4a3518; --sw3:#2b3d22; --ok:#6fd38a; --run:#ffb35c;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Georgia,"Times New Roman",serif}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 80px}
+h1{font-size:1.7rem;margin:.2em 0 .1em;line-height:1.25}
+h2{font-size:1.3rem;margin:2em 0 .5em;border-bottom:1px solid var(--rule);padding-bottom:.2em}
+h3{font-size:1.05rem;margin:1.4em 0 .4em}
+p{margin:.5em 0}
+a{color:var(--link)}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+.sub{color:var(--muted);margin-top:0}
+.ui{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:.92rem}
+.note{color:var(--muted);font-size:.92rem}
+.L{font-style:italic;font-weight:600}
+.L sub{font-style:normal;font-weight:600;font-size:.72em}
+.L sup{font-style:normal;font-size:.72em}
+.g1{color:var(--g1)} .g2{color:var(--g2)} .g3{color:var(--g3)} .g4{color:var(--g4)} .g5{color:var(--g5)} .g6{color:var(--g6)} .gz{color:var(--gz)}
+table{border-collapse:collapse}
+table.ov{width:100%;font-size:.9rem}
+table.ov th,table.ov td{padding:.3em .5em;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+table.ov th{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-weight:600;font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+table.ov td.num{text-align:right;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+.pill{display:inline-block;border:1px solid var(--rule);border-radius:999px;padding:0 .55em;font-family:system-ui,sans-serif;font-size:.78rem;color:var(--muted);text-decoration:none;margin:.05em .1em .05em 0;white-space:nowrap}
+a.pill{color:var(--link)}
+a.pill:hover{border-color:var(--link)}
+/* the bar at the top of every page */
+nav.top{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--rule)}
+nav.top .in{max-width:1100px;margin:0 auto;padding:.45em 16px;display:flex;gap:1.3em;flex-wrap:wrap;align-items:baseline;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:.9rem}
+nav.top a{text-decoration:none;color:var(--fg)}
+nav.top a:hover{color:var(--link)}
+nav.top a.here{color:var(--link);font-weight:600}
+nav.top .brand{font-weight:700;margin-right:auto}
+footer{max-width:1100px;margin:0 auto;padding:0 16px 40px;color:var(--muted);font-size:.85rem;font-family:system-ui,sans-serif}
+
+.authors{margin:.2em 0 1em;font-size:1.05rem}
+.abstract{background:var(--panel);border-radius:8px;padding:.8em 1em;margin:1em 0}
+/* the map of the proof */
+.map{display:grid;grid-template-columns:8.5em 1fr 1fr 11em;gap:0;margin:1em 0;font-size:.93rem}
+.map>div{padding:.55em .7em}
+.map .c1{background:var(--cmod)} .map .c2{background:var(--cbar)} .map .c3{background:var(--cgen)}
+.map .mh{font-family:system-ui,sans-serif;font-weight:600;font-size:.85rem;text-align:center;padding-top:.7em}
+.map .mh span{font-weight:400;color:var(--muted)}
+.map .mh.c1{border-radius:8px 0 0 0} .map .mh.c3{border-radius:0 8px 0 0}
+.map .ml{text-align:right;font-family:system-ui,sans-serif;font-size:.85rem;color:var(--muted);padding-top:1.1em}
+.map .ml b{color:var(--fg);display:block;font-size:.95rem}
+.map .mb{position:relative}
+.map .mb .box{background:var(--bg);border:1px solid var(--rule);border-radius:6px;padding:.45em .6em;height:100%}
+.map .mb.c1 .box::after,.map .mb.c2 .box::after{content:"→";position:absolute;right:-.45em;top:45%;font-family:system-ui,sans-serif;font-weight:700;color:var(--muted);z-index:2}
+.map .mb.c3 .box{text-align:center;display:flex;flex-direction:column;justify-content:center}
+.map .last.c1{border-radius:0 0 0 8px} .map .last.c3{border-radius:0 0 8px 0}
+.map .box a{font-family:system-ui,sans-serif;font-size:.82rem;white-space:nowrap}
+.map .final{grid-column:4;text-align:center;font-weight:700;padding:.5em .7em}
+.map .final div{border:2px solid var(--fg);border-radius:6px;padding:.3em}
+@media (max-width:760px){
+  .map{grid-template-columns:1fr}
+  .map .mh,.map .final:empty{display:none}
+  .map .ml{text-align:left;padding-top:1em;background:none}
+  .map .mb.c1 .box::after,.map .mb.c2 .box::after{content:"↓";right:auto;left:50%;top:auto;bottom:-1.05em}
+  .map .final{grid-column:1}
+}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1em;margin:1em 0}
+.card{border:1px solid var(--rule);border-radius:8px;padding:.8em 1em;text-decoration:none;color:var(--fg);display:block}
+.card:hover{border-color:var(--link)}
+.card b{color:var(--link);font-size:1.05rem}
+.card p{margin:.3em 0 0;font-size:.93rem;color:var(--muted)}
+td .ok{color:var(--ok);font-family:system-ui,sans-serif;font-size:.85rem;white-space:nowrap}
+td .run{color:var(--run);font-family:system-ui,sans-serif;font-size:.85rem;white-space:nowrap}
+td code{white-space:nowrap}
+a.dl{display:inline-block;background:var(--link);color:var(--bg);text-decoration:none;font-family:system-ui,sans-serif;font-weight:600;border-radius:7px;padding:.45em 1.1em;margin:.2em .6em .2em 0}
+a.dl:hover{opacity:.88}
+pre{background:var(--panel);border-radius:6px;padding:.6em .9em;overflow-x:auto;font-size:.88rem}
+</style>
+<script src="config.js"></script>
+</head>
+<body>
+<nav class="top"><div class="in"><a class="brand" href="index.html">The BMM conjecture: programs</a><a href="bases.html">Bases</a><a href="cosettable.html">The coset table of <i>G</i><sub>4</sub></a><a href="index.html#download">Download</a></div></nav>
+<main>
+<h1>The BMM symmetrising trace conjecture for all exceptional complex reflection groups</h1>
+<p class="authors">Eirini Chavli, Maria Chlouveraki, Götz Pfeiffer, Kostas Psaromiligkos</p>
+<div class="abstract"><p>We prove the symmetrising trace conjecture of Broué, Malle and Michel for the generic Hecke
+algebras of all exceptional complex reflection groups. A key ingredient is a new family of bases, constructed via
+breadth-first search, which generalise the standard basis of an Iwahori–Hecke algebra. These bases provide a uniform
+proof of the freeness conjecture of Broué, Malle and Rouquier for these groups. The verification for each group
+reduces to a finite computation, carried out using programs developed with the assistance of a large language model.</p></div>
+<p>This site holds the programs of the paper, their input data, and their complete output. Each program writes a
+<b>record</b>, a text file that lists every identity it tests and the result; all records are included, so every
+result can be checked without running anything. The pages below show the bases and one coset table in detail.</p>
+
+<div class="cards">
+  <a class="card" href="bases.html"><b>The bases</b><p>For each group, the basis used in the proof: its coset trees,
+  drawn interactively, with every word.</p></a>
+  <a class="card" href="cosettable.html"><b>The coset table of <i>G</i><sub>4</sub>, step by step</b><p>Example 4.8,
+  replayed from the program’s own record: how each entry is computed from earlier ones.</p></a>
+  <a class="card" href="#download"><b>Download the programs</b><p>The programs, their data and every record, in one
+  zip file, with the README: requirements, the five programs, the group files and the stages of the records.</p></a>
+</div>
+
+<h2 id="download">Download</h2>
+<p><a class="dl" href="bmm_programs.zip">Download the programs</a> <span class="note">bmm_programs.zip (zip, 0.6 MB, 266 files)</span></p>
+<p>The zip file holds the five programs (<code>programs/</code>), their libraries (<code>lib/</code>), the scripts
+<code>run.sh</code> and <code>run_all.sh</code>, the <a data-file="README.md">README</a>, the Julia environment
+(<code>Project.toml</code>, <code>Manifest.toml</code>: Chevie 0.1.11 and its dependencies, as used for the records),
+and, for every group, its group file, its data (basis, coset table) and its records. Unzip it and follow the README;
+nothing else is needed but Julia. Every file can also be opened on its own from the table of groups below.</p>
+
+<h2>The proof at a glance</h2>
+<p>The rows are the three parts of the proof; the columns are the rings over which the computations are carried out.
+Modular computations only select the candidates. The verifications are exact computations over
+<i>R̄</i>(<i>W</i>), where every constant term <i>a</i><sub><i>s</i>,0</sub> of a Hecke relation is 1, and
+Theorem 3.10, which relies on the grading of Brou&eacute;, Malle and Michel, lifts their conclusions to <i>R</i>(<i>W</i>).</p>
+<div class="map">
+  <div></div>
+  <div class="mh c1">Search, modulo <i>p</i></div>
+  <div class="mh c2">Verification over <i>R̄</i>(<i>W</i>)<br><span>exact, all <i>a</i><sub><i>s</i>,0</sub>&nbsp;=&nbsp;1</span></div>
+  <div class="mh c3">Over <i>R</i>(<i>W</i>)<br><span>by Theorem 3.10</span></div>
+
+  <div class="ml"><b>§4</b>all groups</div>
+  <div class="mb c1"><div class="box">BFS<sub><i>o</i></sub>&nbsp;=&nbsp;𝓑<sub><i>P</i></sub>·𝒯<sub><i>o</i></sub>, with 𝒯<sub><i>o</i></sub>
+    found by breadth-first search; its coset table is completed modulo <i>p</i> and recorded as <code>setRow</code> commands.
+    <br><a href="cosettable.html">G<sub>4</sub>, step by step</a> · <a href="bases.html">the trees</a></div></div>
+  <div class="mb c2"><div class="box">The <code>setRow</code> commands are replayed exactly: the coset table closes, so
+    pr(BFS<sub><i>o</i></sub>) spans <i>H̄</i>(<i>W</i>).<br><a data-file="G4/cosettable04.txt">the commands of G<sub>4</sub></a> ·
+    <a data-file="G4/3_bmm_proof.txt">its record</a></div></div>
+  <div class="mb c3"><div class="box"><b>BFS<sub><i>o</i></sub> is a basis</b><span class="note">Theorem 4.10</span></div></div>
+
+  <div class="ml"><b>§5</b><i>G</i><sub>4</sub>, …, <i>G</i><sub>29</sub></div>
+  <div class="mb c1"><div class="box"><i>z<sup>k</sup></i>-basis candidates from the spanning trees of a coset graph;
+    Modular tests 1 and 2 select 𝓑<sub><i>j</i></sub>; the form <i>E<sub>j</sub></i> (Table 1).
+    <br><a href="bases.html#G16">the <i>z</i><sup>2</sup>-basis of G<sub>16</sub></a> · <a data-file="G16/2_zbasis_modular.txt">modular record</a></div></div>
+  <div class="mb c2"><div class="box">(V1)–(V4): pr(𝓑<sub><i>j</i></sub>) is a basis and pr(<i>E<sub>j</sub></i>) a symmetrising
+    trace (Proposition 5.11); 𝓑<sub><i>j</i></sub> is pr-admissible.<br><a data-file="G16/3_bmm_proof.txt">the proof for G<sub>16</sub></a></div></div>
+  <div class="mb c3"><div class="box"><b><i>G</i><sub>4</sub>, …, <i>G</i><sub>29</sub></b><span class="note">Theorem 5.12</span></div></div>
+
+  <div class="ml"><b>§6</b><i>G</i><sub>31</sub>, …, <i>G</i><sub>34</sub></div>
+  <div class="mb c1 last"><div class="box">A tower <i>P</i><sub>0</sub>&nbsp;&lt;&nbsp;…&nbsp;&lt;&nbsp;<i>P<sub>r</sub></i>&nbsp;=&nbsp;<i>W</i>;
+    the orderings, the seeds of <i>G</i><sub>32</sub> and the pairings are found with the help of modular computations.
+    <br><a href="bases.html#G32">the seeded tree of G<sub>32</sub></a></div></div>
+  <div class="mb c2"><div class="box">At each level, the coset table closes and λ<sub>1</sub> is a symmetrising trace
+    (Propositions 6.7, 6.4, 6.3); at the top, Condition (3) (Lemma 6.9), so 𝓑 is pr-admissible (Proposition 6.10).
+    <br><a data-file="G31/3_bmm_proof.txt">the proof for G<sub>31</sub></a></div></div>
+  <div class="mb c3 last"><div class="box"><b><i>G</i><sub>31</sub>, …, <i>G</i><sub>34</sub></b><span class="note">Theorem 6.11</span></div></div>
+
+  <div></div><div></div><div></div>
+  <div class="final"><div>Theorem 1.1</div></div>
+</div>
+
+<h2>What is verified, and where</h2>
+<div class="scroll"><table class="ov">
+<tr><th>Statement of the paper</th><th>Groups</th><th>Record</th></tr>
+<tr><td>Theorem 4.10: BFS<sub><i>o</i></sub> is a basis (its coset table closes over <i>R̄</i>(<i>W</i>))</td><td>all</td><td><code>3_bmm_proof.txt</code>, stage “Coset table of A”, running the commands of <code>cosettableNN.txt</code></td></tr>
+<tr><td>Proposition 5.11 and Theorem 5.12: (V1)–(V4)</td><td><i>G</i><sub>4</sub>–<i>G</i><sub>29</sub></td><td><code>3_bmm_proof.txt</code></td></tr>
+<tr><td>Propositions 6.4, 6.7 and 6.10, Lemma 6.9, Theorem 6.11</td><td><i>G</i><sub>31</sub>–<i>G</i><sub>34</sub></td><td><code>3_bmm_proof.txt</code></td></tr>
+<tr><td>Remark 6.12: the parabolic freeness conjecture for consecutive levels of the towers</td><td><i>G</i><sub>31</sub>–<i>G</i><sub>34</sub></td><td><code>3_bmm_proof.txt</code>, the stages “Coset table of A” of every level and of the top</td></tr>
+<tr><td>The Gram determinants of the bases: derived from the degrees of the basis and the sign at the group-algebra point, not computed (not part of the proof, not stated in the paper)</td><td><i>G</i><sub>4</sub>–<i>G</i><sub>29</sub></td><td><code>3_bmm_proof.txt</code>, stage “Result”</td></tr>
+<tr><td>Modular tests 1 and 2 (Lemmas 3.11 and 3.12); the triples of Table 1</td><td><i>G</i><sub>4</sub>–<i>G</i><sub>29</sub></td><td><code>2_zbasis_modular.txt</code></td></tr>
+<tr><td>Figure 2: the breadth-first candidates</td><td><i>G</i><sub>4</sub>–<i>G</i><sub>29</sub></td><td><code>5_bfs_orders.txt</code></td></tr>
+<tr><td>Values of the canonical trace (Remark 5.13)</td><td>all</td><td><code>4_trace_values.txt</code></td></tr>
+</table></div>
+<p class="note">A proof record ends with a line <code>all N tests true</code> and, when written through <code>run.sh</code>,
+with <code># &lt;date&gt;  exit code 0</code>. Records 1, 2 and 5 are computed modulo <i>p</i> at one point: they guide the
+search and can only prove negative results. Every proof is exact.</p>
+
+<h2>The groups</h2>
+<div class="scroll"><table class="ov">
+<tr><th>W</th><th class="num">|W|</th><th>basis</th><th>proof</th><th>records</th><th>data</th><th>command</th></tr>
+<tr><td><a href="bases.html#G4"><i>G</i><sub>4</sub></a></td><td class="num">24</td><td><i>z</i>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 17 tests true</span><br><span class="note">11.8 s</span></td><td><a class="pill" data-file="G4/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G4/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G4/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G4/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G4/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G4/group04.toml">group04.toml</a> <a class="pill" data-file="G4/basis04.txt">basis04.txt</a> <a class="pill" data-file="G4/cosettable04.txt">cosettable04.txt</a> <a class="pill" data-file="G4/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G4</code></td></tr>
+<tr><td><a href="bases.html#G5"><i>G</i><sub>5</sub></a></td><td class="num">72</td><td><i>z</i>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 21 tests true</span><br><span class="note">12.0 s</span></td><td><a class="pill" data-file="G5/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G5/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G5/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G5/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G5/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G5/group05.toml">group05.toml</a> <a class="pill" data-file="G5/basis05.txt">basis05.txt</a> <a class="pill" data-file="G5/cosettable05.txt">cosettable05.txt</a> <a class="pill" data-file="G5/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G5</code></td></tr>
+<tr><td><a href="bases.html#G6"><i>G</i><sub>6</sub></a></td><td class="num">48</td><td><i>z</i>-basis over ⟨<i>s</i><sub>2</sub>⟩</td><td><span class="ok">✓ all 19 tests true</span><br><span class="note">14.1 s</span></td><td><a class="pill" data-file="G6/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G6/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G6/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G6/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G6/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G6/group06.toml">group06.toml</a> <a class="pill" data-file="G6/basis06.txt">basis06.txt</a> <a class="pill" data-file="G6/cosettable06.txt">cosettable06.txt</a> <a class="pill" data-file="G6/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G6</code></td></tr>
+<tr><td><a href="bases.html#G7"><i>G</i><sub>7</sub></a></td><td class="num">144</td><td><i>z</i>-basis over ⟨<i>s</i><sub>2</sub>⟩</td><td><span class="ok">✓ all 32 tests true</span><br><span class="note">13.5 s</span></td><td><a class="pill" data-file="G7/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G7/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G7/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G7/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G7/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G7/group07.toml">group07.toml</a> <a class="pill" data-file="G7/basis07.txt">basis07.txt</a> <a class="pill" data-file="G7/cosettable07.txt">cosettable07.txt</a> <a class="pill" data-file="G7/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G7</code></td></tr>
+<tr><td><a href="bases.html#G8"><i>G</i><sub>8</sub></a></td><td class="num">96</td><td><i>z</i>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 19 tests true</span><br><span class="note">12.1 s</span></td><td><a class="pill" data-file="G8/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G8/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G8/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G8/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G8/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G8/group08.toml">group08.toml</a> <a class="pill" data-file="G8/basis08.txt">basis08.txt</a> <a class="pill" data-file="G8/cosettable08.txt">cosettable08.txt</a> <a class="pill" data-file="G8/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G8</code></td></tr>
+<tr><td><a href="bases.html#G9"><i>G</i><sub>9</sub></a></td><td class="num">192</td><td><i>z</i>-basis over ⟨<i>s</i><sub>2</sub>⟩</td><td><span class="ok">✓ all 23 tests true</span><br><span class="note">11.8 s</span></td><td><a class="pill" data-file="G9/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G9/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G9/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G9/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G9/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G9/group09.toml">group09.toml</a> <a class="pill" data-file="G9/basis09.txt">basis09.txt</a> <a class="pill" data-file="G9/cosettable09.txt">cosettable09.txt</a> <a class="pill" data-file="G9/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G9</code></td></tr>
+<tr><td><a href="bases.html#G10"><i>G</i><sub>10</sub></a></td><td class="num">288</td><td><i>z</i>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 27 tests true</span><br><span class="note">12.5 s</span></td><td><a class="pill" data-file="G10/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G10/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G10/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G10/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G10/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G10/group10.toml">group10.toml</a> <a class="pill" data-file="G10/basis10.txt">basis10.txt</a> <a class="pill" data-file="G10/cosettable10.txt">cosettable10.txt</a> <a class="pill" data-file="G10/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G10</code></td></tr>
+<tr><td><a href="bases.html#G11"><i>G</i><sub>11</sub></a></td><td class="num">576</td><td><i>z</i>-basis over ⟨<i>s</i><sub>3</sub>⟩</td><td><span class="ok">✓ all 44 tests true</span><br><span class="note">15.7 s</span></td><td><a class="pill" data-file="G11/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G11/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G11/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G11/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G11/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G11/group11.toml">group11.toml</a> <a class="pill" data-file="G11/basis11.txt">basis11.txt</a> <a class="pill" data-file="G11/cosettable11.txt">cosettable11.txt</a> <a class="pill" data-file="G11/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G11</code></td></tr>
+<tr><td><a href="bases.html#G12"><i>G</i><sub>12</sub></a></td><td class="num">48</td><td><i>z</i>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 22 tests true</span><br><span class="note">12.8 s</span></td><td><a class="pill" data-file="G12/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G12/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G12/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G12/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G12/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G12/group12.toml">group12.toml</a> <a class="pill" data-file="G12/basis12.txt">basis12.txt</a> <a class="pill" data-file="G12/cosettable12.txt">cosettable12.txt</a> <a class="pill" data-file="G12/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G12</code></td></tr>
+<tr><td><a href="bases.html#G13"><i>G</i><sub>13</sub></a></td><td class="num">96</td><td><i>z</i>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 24 tests true</span><br><span class="note">12.8 s</span></td><td><a class="pill" data-file="G13/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G13/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G13/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G13/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G13/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G13/group13.toml">group13.toml</a> <a class="pill" data-file="G13/basis13.txt">basis13.txt</a> <a class="pill" data-file="G13/cosettable13.txt">cosettable13.txt</a> <a class="pill" data-file="G13/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G13</code></td></tr>
+<tr><td><a href="bases.html#G14"><i>G</i><sub>14</sub></a></td><td class="num">144</td><td><i>z</i>-basis over ⟨<i>s</i><sub>2</sub>⟩</td><td><span class="ok">✓ all 21 tests true</span><br><span class="note">12.7 s</span></td><td><a class="pill" data-file="G14/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G14/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G14/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G14/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G14/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G14/group14.toml">group14.toml</a> <a class="pill" data-file="G14/basis14.txt">basis14.txt</a> <a class="pill" data-file="G14/cosettable14.txt">cosettable14.txt</a> <a class="pill" data-file="G14/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G14</code></td></tr>
+<tr><td><a href="bases.html#G15"><i>G</i><sub>15</sub></a></td><td class="num">288</td><td><i>z</i>-basis over ⟨<i>s</i><sub>2</sub>⟩</td><td><span class="ok">✓ all 32 tests true</span><br><span class="note">12.8 s</span></td><td><a class="pill" data-file="G15/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G15/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G15/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G15/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G15/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G15/group15.toml">group15.toml</a> <a class="pill" data-file="G15/basis15.txt">basis15.txt</a> <a class="pill" data-file="G15/cosettable15.txt">cosettable15.txt</a> <a class="pill" data-file="G15/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G15</code></td></tr>
+<tr><td><a href="bases.html#G16"><i>G</i><sub>16</sub></a></td><td class="num">600</td><td><i>z</i><sup>2</sup>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 20 tests true</span><br><span class="note">48.5 s</span></td><td><a class="pill" data-file="G16/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G16/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G16/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G16/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G16/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G16/group16.toml">group16.toml</a> <a class="pill" data-file="G16/basis16.txt">basis16.txt</a> <a class="pill" data-file="G16/cosettable16.txt">cosettable16.txt</a> <a class="pill" data-file="G16/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G16</code></td></tr>
+<tr><td><a href="bases.html#G17"><i>G</i><sub>17</sub></a></td><td class="num">1,200</td><td><i>z</i><sup>4</sup>-basis over ⟨<i>s</i><sub>2</sub>⟩</td><td><span class="ok">✓ all 20 tests true</span><br><span class="note">25.3 s</span></td><td><a class="pill" data-file="G17/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G17/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G17/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G17/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G17/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G17/group17.toml">group17.toml</a> <a class="pill" data-file="G17/basis17.txt">basis17.txt</a> <a class="pill" data-file="G17/cosettable17.txt">cosettable17.txt</a></td><td><code>./run.sh G17</code></td></tr>
+<tr><td><a href="bases.html#G18"><i>G</i><sub>18</sub></a></td><td class="num">1,800</td><td><i>z</i><sup>6</sup>-basis over ⟨<i>s</i><sub>2</sub>⟩</td><td><span class="ok">✓ all 20 tests true</span><br><span class="note">1 min 33 s</span></td><td><a class="pill" data-file="G18/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G18/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G18/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G18/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G18/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G18/group18.toml">group18.toml</a> <a class="pill" data-file="G18/basis18.txt">basis18.txt</a> <a class="pill" data-file="G18/cosettable18.txt">cosettable18.txt</a></td><td><code>./run.sh G18</code></td></tr>
+<tr><td><a href="bases.html#G19"><i>G</i><sub>19</sub></a></td><td class="num">3,600</td><td><i>z</i><sup>12</sup>-basis over ⟨<i>s</i><sub>3</sub>⟩</td><td><span class="ok">✓ all 25 tests true</span><br><span class="note">16 min 10 s</span></td><td><a class="pill" data-file="G19/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G19/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G19/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G19/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G19/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G19/group19.toml">group19.toml</a> <a class="pill" data-file="G19/basis19.txt">basis19.txt</a> <a class="pill" data-file="G19/cosettable19.txt">cosettable19.txt</a></td><td><code>./run.sh G19</code></td></tr>
+<tr><td><a href="bases.html#G20"><i>G</i><sub>20</sub></a></td><td class="num">360</td><td><i>z</i>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 21 tests true</span><br><span class="note">12.1 s</span></td><td><a class="pill" data-file="G20/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G20/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G20/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G20/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G20/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G20/group20.toml">group20.toml</a> <a class="pill" data-file="G20/basis20.txt">basis20.txt</a> <a class="pill" data-file="G20/cosettable20.txt">cosettable20.txt</a> <a class="pill" data-file="G20/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G20</code></td></tr>
+<tr><td><a href="bases.html#G21"><i>G</i><sub>21</sub></a></td><td class="num">720</td><td><i>z</i>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 27 tests true</span><br><span class="note">14.8 s</span></td><td><a class="pill" data-file="G21/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G21/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G21/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G21/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G21/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G21/group21.toml">group21.toml</a> <a class="pill" data-file="G21/basis21.txt">basis21.txt</a> <a class="pill" data-file="G21/cosettable21.txt">cosettable21.txt</a> <a class="pill" data-file="G21/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G21</code></td></tr>
+<tr><td><a href="bases.html#G22"><i>G</i><sub>22</sub></a></td><td class="num">240</td><td><i>z</i>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 24 tests true</span><br><span class="note">12.0 s</span></td><td><a class="pill" data-file="G22/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G22/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G22/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G22/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G22/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G22/group22.toml">group22.toml</a> <a class="pill" data-file="G22/basis22.txt">basis22.txt</a> <a class="pill" data-file="G22/cosettable22.txt">cosettable22.txt</a> <a class="pill" data-file="G22/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G22</code></td></tr>
+<tr><td><a href="bases.html#G24"><i>G</i><sub>24</sub></a></td><td class="num">336</td><td><i>z</i>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 24 tests true</span><br><span class="note">12.1 s</span></td><td><a class="pill" data-file="G24/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G24/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G24/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G24/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G24/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G24/group24.toml">group24.toml</a> <a class="pill" data-file="G24/basis24.txt">basis24.txt</a> <a class="pill" data-file="G24/cosettable24.txt">cosettable24.txt</a> <a class="pill" data-file="G24/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G24</code></td></tr>
+<tr><td><a href="bases.html#G25"><i>G</i><sub>25</sub></a></td><td class="num">648</td><td><i>z</i>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 24 tests true</span><br><span class="note">11.4 s</span></td><td><a class="pill" data-file="G25/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G25/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G25/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G25/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G25/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G25/group25.toml">group25.toml</a> <a class="pill" data-file="G25/basis25.txt">basis25.txt</a> <a class="pill" data-file="G25/cosettable25.txt">cosettable25.txt</a> <a class="pill" data-file="G25/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G25</code></td></tr>
+<tr><td><a href="bases.html#G26"><i>G</i><sub>26</sub></a></td><td class="num">1,296</td><td><i>z</i>-basis over ⟨<i>s</i><sub>2</sub>⟩</td><td><span class="ok">✓ all 27 tests true</span><br><span class="note">11.4 s</span></td><td><a class="pill" data-file="G26/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G26/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G26/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G26/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G26/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G26/group26.toml">group26.toml</a> <a class="pill" data-file="G26/basis26.txt">basis26.txt</a> <a class="pill" data-file="G26/cosettable26.txt">cosettable26.txt</a> <a class="pill" data-file="G26/3_F0.txt">3_F0.txt</a></td><td><code>./run.sh G26</code></td></tr>
+<tr><td><a href="bases.html#G27"><i>G</i><sub>27</sub></a></td><td class="num">2,160</td><td><i>z</i>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 28 tests true</span><br><span class="note">19.8 s</span></td><td><a class="pill" data-file="G27/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G27/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G27/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G27/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G27/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G27/group27.toml">group27.toml</a> <a class="pill" data-file="G27/basis27.txt">basis27.txt</a> <a class="pill" data-file="G27/cosettable27.txt">cosettable27.txt</a></td><td><code>./run.sh G27</code></td></tr>
+<tr><td><a href="bases.html#G29"><i>G</i><sub>29</sub></a></td><td class="num">7,680</td><td><i>z</i>-basis over ⟨<i>s</i><sub>1</sub>⟩</td><td><span class="ok">✓ all 33 tests true</span><br><span class="note">2 min 57 s</span></td><td><a class="pill" data-file="G29/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G29/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G29/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G29/4_trace_values.txt" title="4_trace_values.txt">traces</a> <a class="pill" data-file="G29/5_bfs_orders.txt" title="5_bfs_orders.txt">orders</a></td><td><a class="pill" data-file="G29/group29.toml">group29.toml</a> <a class="pill" data-file="G29/basis29.txt">basis29.txt</a> <a class="pill" data-file="G29/cosettable29.txt">cosettable29.txt</a></td><td><code>./run.sh G29</code></td></tr>
+<tr><td><a href="bases.html#G31"><i>G</i><sub>31</sub></a></td><td class="num">46,080</td><td>tower, top level over G(4,2,3)</td><td><span class="ok">✓ all 85 tests true</span><br><span class="note">10 min 43 s</span></td><td><a class="pill" data-file="G31/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G31/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G31/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G31/4_trace_values.txt" title="4_trace_values.txt">traces</a></td><td><a class="pill" data-file="G31/group31.toml">group31.toml</a> <a class="pill" data-file="G31/basis31.txt">basis31.txt</a> <a class="pill" data-file="G31/cosettable31.txt">cosettable31.txt</a> <a class="pill" data-file="G31/pairing31.txt">pairing31.txt</a></td><td><code>./run.sh G31</code></td></tr>
+<tr><td><a href="bases.html#G32"><i>G</i><sub>32</sub></a></td><td class="num">155,520</td><td>tower, top level over <i>G</i><sub>25</sub></td><td><span class="ok">✓ all 74 tests true</span><br><span class="note">15 min 30 s</span></td><td><a class="pill" data-file="G32/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G32/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G32/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G32/4_trace_values.txt" title="4_trace_values.txt">traces</a></td><td><a class="pill" data-file="G32/group32.toml">group32.toml</a> <a class="pill" data-file="G32/basis32.txt">basis32.txt</a> <a class="pill" data-file="G32/cosettable32.txt">cosettable32.txt</a> <a class="pill" data-file="G32/family32.txt">family32.txt</a></td><td><code>./run.sh G32</code></td></tr>
+<tr><td><a href="bases.html#G33"><i>G</i><sub>33</sub></a></td><td class="num">51,840</td><td>tower, top level over <i>A</i><sub>4</sub></td><td><span class="ok">✓ all 106 tests true</span><br><span class="note">36.0 s</span></td><td><a class="pill" data-file="G33/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G33/2_zbasis_modular.txt" title="2_zbasis_modular.txt">modular</a> <a class="pill" data-file="G33/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G33/4_trace_values.txt" title="4_trace_values.txt">traces</a></td><td><a class="pill" data-file="G33/group33.toml">group33.toml</a> <a class="pill" data-file="G33/basis33.txt">basis33.txt</a> <a class="pill" data-file="G33/cosettable33.txt">cosettable33.txt</a></td><td><code>./run.sh G33</code></td></tr>
+<tr><td><a href="bases.html#G34"><i>G</i><sub>34</sub></a></td><td class="num">39,191,040</td><td>tower, top level over <i>G</i><sub>33</sub></td><td><span class="ok">✓ all 149 tests true</span><br><span class="note">30 h 11 min</span></td><td><a class="pill" data-file="G34/1_bfs_basis.txt" title="1_bfs_basis.txt">bfs</a> <a class="pill" data-file="G34/3_bmm_proof.txt" title="3_bmm_proof.txt">proof</a> <a class="pill" data-file="G34/4_trace_values.txt" title="4_trace_values.txt">traces</a></td><td><a class="pill" data-file="G34/group34.toml">group34.toml</a> <a class="pill" data-file="G34/basis34.txt">basis34.txt</a> <a class="pill" data-file="G34/cosettable34.txt">cosettable34.txt</a></td><td><code>./run.sh G34</code><br><span class="note">needs 16 GB of memory</span></td></tr>
+</table></div>
+
+<h2>Running the programs</h2>
+<p>The programs need Julia 1.12 and the package Chevie 0.1.11; every other package is in Julia’s standard library.
+From the folder of the programs, install the pinned environment once, then run:</p>
+<pre>julia --project=. -e 'import Pkg; Pkg.instantiate()'   # once: Chevie 0.1.11 and its dependencies
+julia --project=. programs/bmm_proof.jl G4             # about 15 s; rewrites G4/3_bmm_proof.txt
+./run.sh G4                                            # the same, niced, with the threads and memory cap of the group file
+./run.sh G20 all                                       # every step of one group</pre>
+<p>Running a program overwrites its record; only dates and times should differ from the shipped version. For
+<i>G</i><sub>4</sub>–<i>G</i><sub>29</sub> each program takes between 10 s and 3 min, except the proof for
+<i>G</i><sub>19</sub> (16 min). The proofs for <i>G</i><sub>31</sub>, <i>G</i><sub>32</sub> and <i>G</i><sub>33</sub>
+take about 11 min, 16 min and under a minute. The proof for <i>G</i><sub>34</sub> took 30 h and 13 GB of memory: run it
+with <code>./run.sh G34 all</code> on a machine with 16 GB (its group file sets the memory cap and Julia’s heap-size
+hint). Its record was written across two resumptions from a checkpoint, with small changes of the programs in between
+that change no value (<a data-file="README.md">README</a>, Section 7).</p>
+</main>
+<footer>Statement numbers refer to the draft of 16 November 2026. The program comments and the records call the paper
+<code>bmm.pdf</code> and cite an earlier numbering; Section 8 of the <a data-file="README.md">README</a> translates it.
+Generated on 16 November 2026 from the programs’ files.</footer>
+<script>(function(){var B=window.PROGRAMS||'bmm_programs/';document.querySelectorAll('[data-file]').forEach(function(a){a.href=B+a.getAttribute('data-file');});})();</script>
+</body>
+</html>
