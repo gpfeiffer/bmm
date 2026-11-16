@@ -1,4 +1,7 @@
-# BMM Symmetrizing Trace Conjecture
+# The BMM Symmetrizing Trace Conjecture
+### for all exceptional complex reflection groups
+
+By Eirini Chavli, Maria Chlouveraki, Götz Pfeiffer and Kostas Psaromiligkos
 
 We prove the symmetrising trace conjecture of Broué, Malle and Michel
 for the generic Hecke algebras of all exceptional complex reflection
