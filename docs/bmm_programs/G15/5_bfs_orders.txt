@@ -1,0 +1,71 @@
+# 2026-11-05 13:45:56  julia programs/bfs_orders.jl G15
+==============================================================================================================
+ H(G15): the tree candidates BFS_o, o in the families of Figure 2, mod p (bmm.pdf, Section 3.3)  bfs_orders.jl, 2026-11-05 13:45 
+==============================================================================================================
+W = G15, |W| = 288; generators s, t, u of orders 2, 3, 2; u s t = s t u; t u s t s = u s t s t
+T_s² = e1 T_s + e0; T_t³ = c2 T_t² + c1 T_t + c0; T_u² = f1 T_u + f0
+U = <t>, e = 3, 96 cosets; z = t u s t s; π = z¹²
+p = 15013; e1 = 11; c1, c2 = 13, 17; f1 = 19; e0 = c0 = f0 = 1; A = BFS_(s, t, z); τ = can_trace
+table: do the sweeps of setRow's complete the coset table of BFS_o;  det: det CBM(A, BFS_o);  quasi-symmetric: τ(a) = δ_(a,1) on BFS_o (else: number of nonzero values)
+==== W and the trace =========================================================================================
+testing in W: s, t, u have orders 2, 3, 2 ... true
+testing in W: u s t = s t u ... true
+testing in W: t u s t s = u s t s t ... true
+testing in W: z = t u s t s is central ... true (z has order 12 in W)
+                                                                                  [time 2.8 s, memory 0.77 GB]
+==== Family (1): orders of S (6 orders) ======================================================================
+o = (s, t, u)          table open (118 rows)        det      1  quasi-symmetric no (7)
+o = (s, u, t)          table open (160 rows)        det     -1  quasi-symmetric no (7)
+o = (t, s, u)          table open (114 rows)        det     -1  quasi-symmetric no (7)
+o = (t, u, s)          table open (141 rows)        det     -1  quasi-symmetric no (4)
+o = (u, s, t)          table open (181 rows)        det      1  quasi-symmetric no (4)
+o = (u, t, s)          table open (182 rows)        det      1  quasi-symmetric no (4)
+                                                                                  [time 1.6 s, memory 0.77 GB]
+==== Family (2): orders of S ∪ {z} (24 orders) ===============================================================
+o = (s, t, u, z)       table complete (9 sweeps)    det      1  quasi-symmetric no (7)
+o = (s, t, z, u)       table complete (9 sweeps)    det     -1  quasi-symmetric no (7)
+o = (s, u, t, z)       table open (12 rows)         det     -1  quasi-symmetric no (7)
+o = (s, u, z, t)       table open (12 rows)         det     -1  quasi-symmetric no (7)
+o = (s, z, t, u)       table complete (9 sweeps)    det      1  quasi-symmetric no (7)
+o = (s, z, u, t)       table open (12 rows)         det      1  quasi-symmetric no (7)
+o = (t, s, u, z)       table complete (9 sweeps)    det      1  quasi-symmetric no (7)
+o = (t, s, z, u)       table complete (8 sweeps)    det     -1  quasi-symmetric no (7)
+o = (t, u, s, z)       table complete (7 sweeps)    det      1  quasi-symmetric no (1)
+o = (t, u, z, s)       table complete (7 sweeps)    det     -1  quasi-symmetric no (1)
+o = (t, z, s, u)       table complete (9 sweeps)    det     -1  quasi-symmetric no (3)
+o = (t, z, u, s)       table complete (9 sweeps)    det     -1  quasi-symmetric yes
+o = (u, s, t, z)       table complete (12 sweeps)   det     -1  quasi-symmetric no (1)
+o = (u, s, z, t)       table complete (11 sweeps)   det      1  quasi-symmetric no (1)
+o = (u, t, s, z)       table complete (10 sweeps)   det      1  quasi-symmetric no (1)
+o = (u, t, z, s)       table complete (10 sweeps)   det     -1  quasi-symmetric no (1)
+o = (u, z, s, t)       table complete (10 sweeps)   det      1  quasi-symmetric no (1)
+o = (u, z, t, s)       table complete (10 sweeps)   det      1  quasi-symmetric no (1)
+o = (z, s, t, u)       table complete (9 sweeps)    det      1  quasi-symmetric no (3)
+o = (z, s, u, t)       table complete (11 sweeps)   det      1  quasi-symmetric no (3)
+o = (z, t, s, u)       table complete (9 sweeps)    det     -1  quasi-symmetric no (3)
+o = (z, t, u, s)       table complete (9 sweeps)    det     -1  quasi-symmetric yes
+o = (z, u, s, t)       table complete (11 sweeps)   det      1  quasi-symmetric yes
+o = (z, u, t, s)       table complete (11 sweeps)   det      1  quasi-symmetric yes
+                                                                                  [time 0.3 s, memory 0.77 GB]
+==== Family (3): orders of S ∪ {z} without one generator (18 orders) =========================================
+o = (s, u, z)          table open (134 rows)        det      1  quasi-symmetric no (1)
+o = (s, z, u)          table open (134 rows)        det      1  quasi-symmetric no (1)
+o = (u, s, z)          table open (140 rows)        det      1  quasi-symmetric no (1)
+o = (u, z, s)          table open (140 rows)        det      1  quasi-symmetric no (1)
+o = (z, s, u)          table open (143 rows)        det      1  quasi-symmetric no (1)
+o = (z, u, s)          table open (143 rows)        det      1  quasi-symmetric no (1)
+o = (s, t, z)          table complete (7 sweeps)    det      1  quasi-symmetric yes
+o = (s, z, t)          table complete (7 sweeps)    det     -1  quasi-symmetric yes
+o = (t, s, z)          table complete (7 sweeps)    det     -1  quasi-symmetric yes
+o = (t, z, s)          table complete (9 sweeps)    det      1  quasi-symmetric yes
+o = (z, s, t)          table complete (9 sweeps)    det      1  quasi-symmetric yes
+o = (z, t, s)          table complete (9 sweeps)    det      1  quasi-symmetric yes
+6 orders do not reach all cosets
+                                                                                  [time 0.1 s, memory 0.77 GB]
+==== Result (mod 15013) ======================================================================================
+family (1), 6 orders: table complete 0, det = ±1 6, quasi-symmetric 0
+family (2), 24 orders: table complete 21, det = ±1 24, quasi-symmetric 4
+family (3), 12 orders: table complete 6, det = ±1 12, quasi-symmetric 6
+==============================================================================================================
+                                                                      [total time 11.2 s, peak memory 0.77 GB]
+# 2026-11-05 13:46:01  exit code 0

@@ -1,0 +1,20 @@
+# H(G6): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G6"
+order        = 48
+letters      = ["s", "u"]                 # letter 1 = s, 2 = u; letter 3 = z
+orders       = [2, 3]
+classes      = [1, 2]
+params       = [["e0", "e1"], ["c0", "c1", "c2"]]   # T_s^2 = e1 T_s + e0, T_u^3 = c2 T_u^2 + c1 T_u + c0 (e0, c0 invertible)
+chevie_group = 6
+chevie       = [1, 2]
+braid        = ["1,2,1,2,1,2 = 2,1,2,1,2,1"]
+parabolic    = 2                          # U = <u>
+zword        = "1,2,1,2,1,2"              # z = (s u)^3, central of order 4
+zstep        = 1
+zlevels      = 4
+pipower      = 4                          # T_pi = T_z^4 = (T_s T_u)^12
+bfs          = "1,2"
+basis        = "basis06.txt"
+table        = "cosettable06.txt"
+trace        = "0,1,0"                    # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h
+bmm_table    = "+c0^192 e0^264"           # not in Table 2 of bmm.pdf

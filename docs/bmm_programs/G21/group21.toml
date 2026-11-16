@@ -1,0 +1,20 @@
+# H(G21): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G21"
+order        = 720
+letters      = ["t", "s"]                 # letter 1 = t (the parabolic), 2 = s; letter 3 = z
+orders       = [3, 2]
+classes      = [1, 2]
+params       = [["c0", "c1", "c2"], ["e0", "e1"]]   # T_t^3 = c2 T_t^2 + c1 T_t + c0, T_s^2 = e1 T_s + e0 (c0, e0 invertible)
+chevie_group = 21
+chevie       = [2, 1]                     # crg(21) has generator orders [2, 3]
+braid        = ["1,2,1,2,1,2,1,2,1,2 = 2,1,2,1,2,1,2,1,2,1"]
+parabolic    = 1                          # U = <t>
+zword        = "1,2,1,2,1,2,1,2,1,2"      # z = (t s)^5, central of order 12
+zstep        = 1
+zlevels      = 12
+pipower      = 12                         # T_pi = T_z^12 = (T_t T_s)^60
+bfs          = "2,1"                      # the order o = (s, t) of BFS_o; BFS_o is quasi-symmetric
+basis        = "basis21.txt"
+table        = "cosettable21.txt"
+trace        = "0,1,0"                    # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h
+bmm_table    = "+c0^14040 e0^21132"

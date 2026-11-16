@@ -1,0 +1,237 @@
+# 2026-11-12 11:46:22  julia programs/zbasis_modular.jl G33/group33.toml
+==============================================================================================================
+ H(G33): the tests of Proposition 5.3 modulo p at a point (bmm.pdf, Section 5)  zbasis_modular.jl, 2026-11-12 11:46 
+==============================================================================================================
+W = G33, |W| = 51840; generators s1, s2, s3, s4, s5 of order 2; s1 s2 s1 = s2 s1 s2; s1 s3 = s3 s1;
+    s1 s4 = s4 s1; s1 s5 = s5 s1; s2 s3 s2 = s3 s2 s3; s2 s4 s2 = s4 s2 s4; s2 s5 = s5 s2;
+    s3 s4 s3 = s4 s3 s4; s3 s5 = s5 s3; s4 s5 s4 = s5 s4 s5; s4 s2 s3 s4 s2 s3 = s3 s4 s2 s3 s4 s2;
+    s3 s4 s2 s3 s4 s2 = s2 s3 s4 s2 s3 s4
+T_s1² = e1 T_s1 + e0 (same for T_s2, T_s3, T_s4, T_s5)
+tower 1 < <s1> < <s1, s2> < <s1, s2, s4> < <s1, s2, s4, s5> < W (engine tower);
+    z = s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5;
+    π = z²
+A = B_P · X, B_P = the basis of H(A4) built level by level, P = A4 = <s1, s2, s4, s5> (cosettable33.txt); B =
+    A (X: basis33.txt)
+p = 15013; e1 = 11; e0 = 1
+the coset tables are filled by the setRow procedure (bmm.pdf §3.3), without the columns of z
+==== The presentation, in W ==================================================================================
+testing in W: s1, s2, s3, s4, s5 have orders 2, 2, 2, 2, 2 ... true
+testing in W: s1 s2 s1 = s2 s1 s2 ... true
+testing in W: s1 s3 = s3 s1 ... true
+testing in W: s1 s4 = s4 s1 ... true
+testing in W: s1 s5 = s5 s1 ... true
+testing in W: s2 s3 s2 = s3 s2 s3 ... true
+testing in W: s2 s4 s2 = s4 s2 s4 ... true
+testing in W: s2 s5 = s5 s2 ... true
+testing in W: s3 s4 s3 = s4 s3 s4 ... true
+testing in W: s3 s5 = s5 s3 ... true
+testing in W: s4 s5 s4 = s5 s4 s5 ... true
+testing in W: s4 s2 s3 s4 s2 s3 = s3 s4 s2 s3 s4 s2 ... true
+testing in W: s3 s4 s2 s3 s4 s2 = s2 s3 s4 s2 s3 s4 ... true
+testing in W: z = s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 is central ... true (z has order 2 in W)
+                                                                                  [time 0.1 s, memory 1.11 GB]
+==== Pairing, level 0: H(<s1>) with the basis 1, T_s1 (Lemma 4.13) ===========================================
+testing det Gram(τ) on the basis 1, T_s1 is a unit ... true (det = 1|1)
+                                                                                  [time 3.6 s, memory 1.14 GB]
+==== Coset table of A, level 1: H(A2) over H(<s1>), A2 = <s1, s2> (Proposition 3.8) ==========================
+testing |A2| = 6 ... true
+testing the table of H(A2) over H(<s1>) closes by setRow sweeps (§3.3) from the relations of W among s1, s2 ... true (3 cosets; 1 sweeps, 2 tree edges, 6 setRow's)
+rows: 6; cosets per row: mean 1.33, max 2; entries: 8; terms per entry: mean 1.0, max 1
+coset words x_n: 1, s2, s2 s1
+                                                                                  [time 0.7 s, memory 1.14 GB]
+==== Relations of H on the table, level 1 ====================================================================
+testing the tree rows x_n T_s = x_m (x_m = x_n s) and x T_s = T_s x (s in P, x = 1) are in the table ... true
+testing T_s1² = e1 T_s1 + 1 on all cosets ... true
+testing T_s2² = e1 T_s2 + 1 on all cosets ... true
+testing s1 s2 s1 = s2 s1 s2 on all cosets ... true
+testing the flat algebra H(A2) of rank 6 satisfies its relations ... true
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Bimodule map, level 1 (Lemma 5.1) =======================================================================
+testing E(x_n T_s) = δ_(n,1) T_s for all cosets n and the generators s of P ... true
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Linear form t: symmetry, level 1 (Proposition 4.11) =====================================================
+t = τ_P ∘ E, P = <s1>: the coefficient of 1 on the basis B = B_P · X of H(A2), 2 · 3 elements
+T_s1 in P and E(x_n T_s1) = δ_(n,1) T_s1 (the table): t(T_s1 b x) = δ_(x,1) τ_P(T_s1 b), t(b x T_s1) = δ_(x,1) τ_P(b T_s1)
+testing t(b T_s1) = t(T_s1 b) for all b in B = B_P · X ... true (6 identities: 4 read 0 = 0, 2 read τ_P(T_s1 b) = τ_P(b T_s1))
+the Gram matrix τ_P(b b') of H(<s1>), b, b' in B_P: by products
+T_s2: the rows T_s2 b reach 2 coset(s) (at most 1 at once); E(x_n T_s2) ≠ 0 at 1 coset(s); 1 nonzero values t(T_s2 b x)  [24.7 s, 1.14 GB]
+testing t(b T_s2) = t(T_s2 b) for all b in B = B_P · X ... true (6 identities)
+E(x_n x) for x in X at the 2 cosets n reached: 4 rows x_n x (|x| ≤ 17), 0 columns M_u e_1 of the tails u; 2 nonzero values, 2 terms
+                                                                                  [time 0.6 s, memory 1.14 GB]
+==== Pairing, level 1 (Lemma 5.2) ============================================================================
+the pairing matrix (E(x_n y_m)) with the reversed words y_m: 3 nonzero entries of 9; 3 diagonal blocks, 3 of size 1 (the matrix is triangular in a suitable order)
+testing the pairing matrix (E(x_n y_m)) with the reversed words y_m is triangular (every strongly connected component of its support is a single index) ... true
+diagonal entries: b_1 ×3
+testing the 3 diagonal entries of the pairing matrix (E(x_n y_m)) with the reversed words y_m are recognised units of H(P) (± b, ± b^-1 b', ± b b'^-1, times a power of z_P) ... true (3 are ± a basis element)
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Condition (3), level 1 (Proposition 5.3 (3), via (2.4)) =================================================
+testing (s1 s2)³ is central: T_(s1 s2)³ T_s = T_s T_(s1 s2)³ for all generators s ... true
+t(T_π) = 1|1; the form h -> t(h T_π) lives on 3 cosets
+testing t(T_π) = 1 ... true
+testing t(T_β^-1 T_π) = 0 for all β ≠ 1 in B (and = t(T_π) for β = 1) [Malle–Michel, Prop. 2.7] ... true (6 identities)
+                                                                                  [time 0.3 s, memory 1.14 GB]
+==== Coset table of A, level 2: H(A3) over H(A2), A3 = <s1, s2, s4> (Proposition 3.8) ========================
+testing |A3| = 24 ... true
+testing the table of H(A3) over H(A2) closes by setRow sweeps (§3.3) from the relations of W among s1, s2, s4 ... true (4 cosets; 1 sweeps, 3 tree edges, 14 setRow's)
+rows: 12; cosets per row: mean 1.25, max 2; entries: 15; terms per entry: mean 1.0, max 1
+coset words x_n: 1, s4, s4 s2, s4 s2 s1
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Relations of H on the table, level 2 ====================================================================
+testing the tree rows x_n T_s = x_m (x_m = x_n s) and x T_s = T_s x (s in P, x = 1) are in the table ... true
+testing T_s1² = e1 T_s1 + 1 on all cosets ... true
+testing T_s2² = e1 T_s2 + 1 on all cosets ... true
+testing T_s4² = e1 T_s4 + 1 on all cosets ... true
+testing s1 s2 s1 = s2 s1 s2 on all cosets ... true
+testing s1 s4 = s4 s1 on all cosets ... true
+testing s2 s4 s2 = s4 s2 s4 on all cosets ... true
+testing the flat algebra H(A3) of rank 24 satisfies its relations ... true
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Bimodule map, level 2 (Lemma 5.1) =======================================================================
+testing E(x_n T_s) = δ_(n,1) T_s for all cosets n and the generators s of P ... true
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Linear form t: symmetry, level 2 (Proposition 4.11) =====================================================
+t = τ_P ∘ E, P = A2: the coefficient of 1 on the basis B = B_P · X of H(A3), 6 · 4 elements
+T_s1 in P and E(x_n T_s1) = δ_(n,1) T_s1 (the table): t(T_s1 b x) = δ_(x,1) τ_P(T_s1 b), t(b x T_s1) = δ_(x,1) τ_P(b T_s1)
+testing t(b T_s1) = t(T_s1 b) for all b in B = B_P · X ... true (24 identities: 18 read 0 = 0, 6 read τ_P(T_s1 b) = τ_P(b T_s1))
+T_s2 in P and E(x_n T_s2) = δ_(n,1) T_s2 (the table): t(T_s2 b x) = δ_(x,1) τ_P(T_s2 b), t(b x T_s2) = δ_(x,1) τ_P(b T_s2)
+testing t(b T_s2) = t(T_s2 b) for all b in B = B_P · X ... true (24 identities: 18 read 0 = 0, 6 read τ_P(T_s2 b) = τ_P(b T_s2))
+the Gram matrix τ_P(b b') of H(A2), b, b' in B_P: through its table over H(<s1>) (6 suffix nodes), 6 nonzero entries of 6²  [25.0 s, 1.14 GB]
+T_s4: the rows T_s4 b reach 3 coset(s) (at most 1 at once); E(x_n T_s4) ≠ 0 at 1 coset(s); 1 nonzero values t(T_s4 b x)  [25.0 s, 1.14 GB]
+testing t(b T_s4) = t(T_s4 b) for all b in B = B_P · X ... true (24 identities)
+E(x_n x) for x in X at the 3 cosets n reached: 9 rows x_n x (|x| ≤ 17), 0 columns M_u e_1 of the tails u; 3 nonzero values, 3 terms
+                                                                                  [time 0.1 s, memory 1.14 GB]
+==== Pairing, level 2 (Lemma 5.2) ============================================================================
+the pairing matrix (E(x_n y_m)) with the reversed words y_m: 4 nonzero entries of 16; 4 diagonal blocks, 4 of size 1 (the matrix is triangular in a suitable order)
+testing the pairing matrix (E(x_n y_m)) with the reversed words y_m is triangular (every strongly connected component of its support is a single index) ... true
+diagonal entries: b_1 ×4
+testing the 4 diagonal entries of the pairing matrix (E(x_n y_m)) with the reversed words y_m are recognised units of H(P) (± b, ± b^-1 b', ± b b'^-1, times a power of z_P) ... true (4 are ± a basis element)
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Condition (3), level 2 (Proposition 5.3 (3), via (2.4)) =================================================
+testing (s1 s2 s4)⁴ is central: T_(s1 s2 s4)⁴ T_s = T_s T_(s1 s2 s4)⁴ for all generators s ... true
+t(T_π) = 1|1; the form h -> t(h T_π) lives on 4 cosets
+testing t(T_π) = 1 ... true
+testing t(T_β^-1 T_π) = 0 for all β ≠ 1 in B (and = t(T_π) for β = 1) [Malle–Michel, Prop. 2.7] ... true (24 identities)
+                                                                                  [time 0.1 s, memory 1.14 GB]
+==== Coset table of A, level 3: H(A4) over H(A3), A4 = <s1, s2, s4, s5> (Proposition 3.8) ====================
+testing |A4| = 120 ... true
+testing the table of H(A4) over H(A3) closes by setRow sweeps (§3.3) from the relations of W among s1, s2, s4, s5 ... true (5 cosets; 1 sweeps, 4 tree edges, 26 setRow's)
+rows: 20; cosets per row: mean 1.2, max 2; entries: 24; terms per entry: mean 1.0, max 1
+coset words x_n: 1, s5, s5 s4, s5 s4 s2, s5 s4 s2 s1
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Relations of H on the table, level 3 ====================================================================
+testing the tree rows x_n T_s = x_m (x_m = x_n s) and x T_s = T_s x (s in P, x = 1) are in the table ... true
+testing T_s1² = e1 T_s1 + 1 on all cosets ... true
+testing T_s2² = e1 T_s2 + 1 on all cosets ... true
+testing T_s4² = e1 T_s4 + 1 on all cosets ... true
+testing T_s5² = e1 T_s5 + 1 on all cosets ... true
+testing s1 s2 s1 = s2 s1 s2 on all cosets ... true
+testing s1 s4 = s4 s1 on all cosets ... true
+testing s1 s5 = s5 s1 on all cosets ... true
+testing s2 s4 s2 = s4 s2 s4 on all cosets ... true
+testing s2 s5 = s5 s2 on all cosets ... true
+testing s4 s5 s4 = s5 s4 s5 on all cosets ... true
+testing the flat algebra H(A4) of rank 120 satisfies its relations ... true
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Bimodule map, level 3 (Lemma 5.1) =======================================================================
+testing E(x_n T_s) = δ_(n,1) T_s for all cosets n and the generators s of P ... true
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Linear form t: symmetry, level 3 (Proposition 4.11) =====================================================
+t = τ_P ∘ E, P = A3: the coefficient of 1 on the basis B = B_P · X of H(A4), 24 · 5 elements
+T_s1 in P and E(x_n T_s1) = δ_(n,1) T_s1 (the table): t(T_s1 b x) = δ_(x,1) τ_P(T_s1 b), t(b x T_s1) = δ_(x,1) τ_P(b T_s1)
+testing t(b T_s1) = t(T_s1 b) for all b in B = B_P · X ... true (120 identities: 96 read 0 = 0, 24 read τ_P(T_s1 b) = τ_P(b T_s1))
+T_s2 in P and E(x_n T_s2) = δ_(n,1) T_s2 (the table): t(T_s2 b x) = δ_(x,1) τ_P(T_s2 b), t(b x T_s2) = δ_(x,1) τ_P(b T_s2)
+testing t(b T_s2) = t(T_s2 b) for all b in B = B_P · X ... true (120 identities: 96 read 0 = 0, 24 read τ_P(T_s2 b) = τ_P(b T_s2))
+T_s4 in P and E(x_n T_s4) = δ_(n,1) T_s4 (the table): t(T_s4 b x) = δ_(x,1) τ_P(T_s4 b), t(b x T_s4) = δ_(x,1) τ_P(b T_s4)
+testing t(b T_s4) = t(T_s4 b) for all b in B = B_P · X ... true (120 identities: 96 read 0 = 0, 24 read τ_P(T_s4 b) = τ_P(b T_s4))
+the Gram matrix τ_P(b b') of H(A3), b, b' in B_P: through its table over H(A2) (24 suffix nodes), 24 nonzero entries of 24²  [25.1 s, 1.14 GB]
+T_s5: the rows T_s5 b reach 4 coset(s) (at most 1 at once); E(x_n T_s5) ≠ 0 at 1 coset(s); 1 nonzero values t(T_s5 b x)  [25.1 s, 1.14 GB]
+testing t(b T_s5) = t(T_s5 b) for all b in B = B_P · X ... true (120 identities)
+E(x_n x) for x in X at the 4 cosets n reached: 16 rows x_n x (|x| ≤ 17), 0 columns M_u e_1 of the tails u; 4 nonzero values, 4 terms
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Pairing, level 3 (Lemma 5.2) ============================================================================
+the pairing matrix (E(x_n y_m)) with the reversed words y_m: 5 nonzero entries of 25; 5 diagonal blocks, 5 of size 1 (the matrix is triangular in a suitable order)
+testing the pairing matrix (E(x_n y_m)) with the reversed words y_m is triangular (every strongly connected component of its support is a single index) ... true
+diagonal entries: b_1 ×5
+testing the 5 diagonal entries of the pairing matrix (E(x_n y_m)) with the reversed words y_m are recognised units of H(P) (± b, ± b^-1 b', ± b b'^-1, times a power of z_P) ... true (5 are ± a basis element)
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Condition (3), level 3 (Proposition 5.3 (3), via (2.4)) =================================================
+testing (s1 s2 s4 s5)⁵ is central: T_(s1 s2 s4 s5)⁵ T_s = T_s T_(s1 s2 s4 s5)⁵ for all generators s ... true
+t(T_π) = 1|1; the form h -> t(h T_π) lives on 5 cosets
+testing t(T_π) = 1 ... true
+testing t(T_β^-1 T_π) = 0 for all β ≠ 1 in B (and = t(T_π) for β = 1) [Malle–Michel, Prop. 2.7] ... true (120 identities)
+                                                                                  [time 1.3 s, memory 1.14 GB]
+==== Coset table of A (Proposition 3.8, Theorem 3.11) ========================================================
+X = T_o(P\W), o = (s1, s2, s3, s4, s5), P = A4 = <s1, s2, s4, s5>: 432 words, closed under prefixes, one per
+    coset; longest 21
+basis33.txt lists X (checked)
+execution of the setRow program cosettable33.txt: 431 makeEdge's and 3450 setRow's
+testing every rel command of cosettable33.txt uses an identity σ = w read off a relator (z = zword, z central, the braid relations) ... true
+testing all 3450 setRow's compile, and every column of the table is complete ... true (0 rows open)
+rows: 4320; cosets per row: mean 4.66, max 120; entries: 20145; terms per entry: mean 3.6, max 76
+                                                                                  [time 0.1 s, memory 1.14 GB]
+==== Relations of H on the table =============================================================================
+testing the tree rows x_n T_s = x_m (x_m = x_n s) and x T_s = T_s x (s in P, x = 1) are in the table ... true
+testing T_s1² = e1 T_s1 + 1 on all cosets ... true
+testing T_s2² = e1 T_s2 + 1 on all cosets ... true
+testing T_s3² = e1 T_s3 + 1 on all cosets ... true
+testing T_s4² = e1 T_s4 + 1 on all cosets ... true
+testing T_s5² = e1 T_s5 + 1 on all cosets ... true
+testing s1 s2 s1 = s2 s1 s2 on all cosets ... true
+testing s1 s3 = s3 s1 on all cosets ... true
+testing s1 s4 = s4 s1 on all cosets ... true
+testing s1 s5 = s5 s1 on all cosets ... true
+testing s2 s3 s2 = s3 s2 s3 on all cosets ... true
+testing s2 s4 s2 = s4 s2 s4 on all cosets ... true
+testing s2 s5 = s5 s2 on all cosets ... true
+testing s3 s4 s3 = s4 s3 s4 on all cosets ... true
+testing s3 s5 = s5 s3 on all cosets ... true
+testing s4 s5 s4 = s5 s4 s5 on all cosets ... true
+testing s4 s2 s3 s4 s2 s3 = s3 s4 s2 s3 s4 s2 on all cosets ... true
+testing s3 s4 s2 s3 s4 s2 = s2 s3 s4 s2 s3 s4 on all cosets ... true
+testing z is central: T_z T_s = T_s T_z for all generators s ... true
+                                                                                  [time 1.6 s, memory 1.14 GB]
+==== Bimodule map (Lemma 5.1) ================================================================================
+testing E(x_n T_s) = δ_(n,1) T_s for all cosets n and the generators s of P ... true
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Linear form t: symmetry (Proposition 4.11) ==============================================================
+t = τ_P ∘ E, P = A4: the coefficient of 1 on the basis B = B_P · X of H(G33), 120 · 432 elements
+T_s1 in P and E(x_n T_s1) = δ_(n,1) T_s1 (the table): t(T_s1 b x) = δ_(x,1) τ_P(T_s1 b), t(b x T_s1) = δ_(x,1) τ_P(b T_s1)
+testing t(b T_s1) = t(T_s1 b) for all b in B = B_P · X ... true (51840 identities: 51720 read 0 = 0, 120 read τ_P(T_s1 b) = τ_P(b T_s1))
+T_s2 in P and E(x_n T_s2) = δ_(n,1) T_s2 (the table): t(T_s2 b x) = δ_(x,1) τ_P(T_s2 b), t(b x T_s2) = δ_(x,1) τ_P(b T_s2)
+testing t(b T_s2) = t(T_s2 b) for all b in B = B_P · X ... true (51840 identities: 51720 read 0 = 0, 120 read τ_P(T_s2 b) = τ_P(b T_s2))
+the Gram matrix τ_P(b b') of H(A4), b, b' in B_P: through its table over H(A3) (120 suffix nodes), 120 nonzero entries of 120²  [28.0 s, 1.14 GB]
+T_s3: the rows T_s3 b reach 30 coset(s) (at most 1 at once); E(x_n T_s3) ≠ 0 at 1 coset(s); 1 nonzero values t(T_s3 b x)  [29.8 s, 1.14 GB]
+testing t(b T_s3) = t(T_s3 b) for all b in B = B_P · X ... true (51840 identities)
+T_s4 in P and E(x_n T_s4) = δ_(n,1) T_s4 (the table): t(T_s4 b x) = δ_(x,1) τ_P(T_s4 b), t(b x T_s4) = δ_(x,1) τ_P(b T_s4)
+testing t(b T_s4) = t(T_s4 b) for all b in B = B_P · X ... true (51840 identities: 51720 read 0 = 0, 120 read τ_P(T_s4 b) = τ_P(b T_s4))
+T_s5 in P and E(x_n T_s5) = δ_(n,1) T_s5 (the table): t(T_s5 b x) = δ_(x,1) τ_P(T_s5 b), t(b x T_s5) = δ_(x,1) τ_P(b T_s5)
+testing t(b T_s5) = t(T_s5 b) for all b in B = B_P · X ... true (51840 identities: 51720 read 0 = 0, 120 read τ_P(T_s5 b) = τ_P(b T_s5))
+E(x_n x) for x in X at the 30 cosets n reached: 12600 rows x_n x (|x| ≤ 17), 12 columns M_u e_1 of the tails u; 98 nonzero values, 362 terms
+                                                                                  [time 1.8 s, memory 1.14 GB]
+==== Values on B (§5.1: τ_B = τ_P ∘ E_X) =====================================================================
+B = B_P · X is the basis of the table: t(b x_n) = τ_P(b E(x_n)) = τ_P(b) δ_(n,1)
+                                                                                  [time 0.0 s, memory 1.14 GB]
+==== Pairing (Lemma 5.2, Proposition 5.4): M(X, rev X) = (E(x_n rev(x_m))) over H(P) =========================
+M: 13606 nonzero entries of 186624 in H(P); strongly connected blocks: 426 singletons and blocks of sizes 6
+the singletons: b_1 ×426
+testing the 426 singletons M_nn are recognised units of H(P) ... true
+testing the block of 6 cosets [257, 275, 276, 313, 431, 432]: elimination over H(P) with recognised units as pivots (M_C = L U) ... true (pivots b_1, b_1, b_1, b_1, b_1, b_1)
+                                                                                  [time 0.2 s, memory 1.14 GB]
+==== Condition (3) (Proposition 5.3 (3), via (2.4)) ==========================================================
+ζ = z is central (z is central, stage Relations) and ζ² = π
+the form h -> t(h T_ζ), ζ = z: supported on the coset 432; x_432 = s3 s2 s1 s4 s2 s3 s4 s5 s4 s2 s1 s3 s2 s4 s3 s2 s1 s5 s4 s2 s3, 2 terms
+testing the form h -> t(h T_ζ) lives on a single coset c ... true
+t(T_π) = t(T_ζ^2) = τ_P((T_ζ)_c ψ_c) = 1|1
+testing t(T_π) = 1 ... true
+the columns M_(x_m^-1) e_c: 7828 nonzero entries of 186624
+testing E(x_m^-1 T_ζ) = 0 for the 431 cosets m ≠ c ... true
+not computed: τ_P(E(x_c^-1 T_ζ) b^-1) = τ_P(b ψ_c)^* t(T_π) for the 120 elements b of the basis of H(P) (r -> r^* is not defined at a point; tested in the exact run)
+                                                                                  [time 3.6 s, memory 1.14 GB]
+==== Result (mod 15013) ======================================================================================
+all 105 tests true; 1 identity not computed modulo p (tested in the exact run)
+degree 2 Σ ℓ(b) = 1718880, exponent 1718880/2 (the homogeneity argument of bmm.pdf of 3 Nov, Corollary 5.10);
+    sign (−1)^((51840 − 632)/2) at the group-algebra point
+predicted: det Gram(τ_B) = + e0^859440
+==============================================================================================================
+                                                                      [total time 33.6 s, peak memory 1.14 GB]
+# 2026-11-12 11:46:38  exit code 0

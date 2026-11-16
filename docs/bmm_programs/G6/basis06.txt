@@ -1,0 +1,7 @@
+# The set X of the z-basis B = {u^m z^κ x : 0 <= m < 3, 0 <= κ < 4, x in X} of H(G6), z = (s u)^3; letters 1 = s, 2 = u.
+# X = {1, s, su, sus} is Chavli–Pfeiffer's X6.
+# One word per line, in breadth-first order of the tree of X; e is the empty word; a negative letter is an inverse.
+e
+1
+1,2
+1,2,1

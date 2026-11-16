@@ -1,0 +1,20 @@
+# H(G26): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G26"
+order        = 1296
+letters      = ["s", "t", "u"]            # letter 1 = s, 2 = t, 3 = u; letter 4 = z
+orders       = [2, 3, 3]
+classes      = [1, 2, 2]                  # two classes of reflections: {s}, {t, u}
+params       = [["e0", "e1"], ["c0", "c1", "c2"]]   # T_s^2 = e1 T_s + e0, T^3 = c2 T^2 + c1 T + c0 (e0, c0 invertible)
+chevie_group = 26
+chevie       = [1, 2, 3]
+braid        = ["1,2,1,2 = 2,1,2,1", "2,3,2 = 3,2,3", "1,3 = 3,1"]
+parabolic    = 2                          # U = <t>
+zword        = "1,2,3,1,2,3,1,2,3"        # z = (s t u)^3, central of order 6
+zstep        = 1
+zlevels      = 6
+pipower      = 6                          # T_pi = T_z^6
+bfs          = "1,2,3"
+basis        = "basis26.txt"
+table        = "cosettable26.txt"
+trace        = "0,1,0"                    # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h
+bmm_table    = "+c0^17412 e0^11016"

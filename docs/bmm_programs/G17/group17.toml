@@ -1,0 +1,20 @@
+# H(G17): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G17"
+order        = 1200
+letters      = ["s", "t"]                 # letter 1 = s, 2 = t (the parabolic); letter 3 = z
+orders       = [2, 5]
+classes      = [1, 2]
+params       = [["e0", "e1"], ["d0", "d1", "d2", "d3", "d4"]]   # T_s^2 = e1 T_s + e0, T_t^5 = d4 T_t^4 + ... + d1 T_t + d0 (e0, d0 invertible)
+chevie_group = 17
+chevie       = [1, 2]
+braid        = ["1,2,1,2,1,2 = 2,1,2,1,2,1"]
+parabolic    = 2                          # U = <t>
+zword        = "1,2,1,2,1,2"              # z = (s t)^3, central of order 20 in W
+zstep        = 4                          # B is a z^4-basis (no z- or z^2-basis of this shape was found)
+zlevels      = 5
+pipower      = 20                         # T_pi = T_z^20 = (T_s T_t)^60
+bfs          = "1,2"                      # the order o = (s, t) of BFS_o, A = S (bmm.pdf, Figure 2)
+basis        = "basis17.txt"
+table        = "cosettable17.txt"
+trace        = "1,237,4"                  # (J,i,m) of E_j (bmm.pdf §4.3, Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h
+bmm_table    = "+d0^14740 e0^32050"

@@ -1,0 +1,42 @@
+# 2026-11-05 14:08:43  julia programs/zbasis_modular.jl G19
+==============================================================================================================
+ H(G19): the z¹²-basis B tested modulo p (bmm.pdf, Section 4)             zbasis_modular.jl, 2026-11-05 14:08 
+==============================================================================================================
+W = G19, |W| = 3600; generators s, t, u of orders 2, 3, 5; s t u = t u s; s t u = u s t
+T_s² = e1 T_s + e0; T_t³ = c2 T_t² + c1 T_t + c0; T_u⁵ = d4 T_u⁴ + d3 T_u³ + d2 T_u² + d1 T_u + d0
+U = <u>, e = 5, 720 cosets; z = s t u; π = z⁶⁰
+A = BFS_(z, s, t, u) (cosettable19.txt); B = { T_z^(12j) T_u^m T_x : j < 5, m < 5, x in X }, |X| = 144 (basis19.txt)
+p = 15013; e1 = 11; c1, c2 = 13, 17; d1, d2, d3, d4 = 19, 23, 29, 31; e0 = c0 = d0 = 1
+==== Coset table of A and CBM(A, B) (Lemma 2.6) ==============================================================
+testing the 4320 setRow's of cosettable19.txt compile and the relations of H hold ... true
+testing det CBM(A, B) = ±1 ... true (det = -1)
+                                                                                 [time 47.1 s, memory 0.91 GB]
+==== τ_B in the basis A: φ_j(h) = τ_B(T_z^(12j) h), [a] = coefficient of a in A ==============================
+φ_0: 150 coordinates
+φ_1: 4 coordinates = [T_u³ T_(w_581)] + (31)[T_u⁴ T_(w_581)] + (-19)[T_u³ T_(w_703)] + (-589)[T_u⁴ T_(w_703)]
+φ_2: 3 coordinates = [T_u² T_(w_703)] + (31)[T_u³ T_(w_703)] + (990)[T_u⁴ T_(w_703)]
+φ_3: 1 coordinate = [T_u⁴ T_(w_704)]
+φ_4: 97 coordinates
+trace = "3,704,4"
+testing the trace "3,704,4" of the group file gives τ_B ... true
+τ_B(a) = δ_(a,1) on A: no (149 of 3599 values nonzero)
+                                                                                  [time 0.8 s, memory 0.91 GB]
+==== Proposition 4.17 and Theorem 4.18 at the point (t = can_trace) ==========================================
+testing t(a T_s) = t(T_s a) for all a in A ... true
+testing t(a T_t) = t(T_t a) for all a in A ... true
+testing t(a T_u) = t(T_u a) for all a in A ... true
+testing t(b) = δ_(b,1) for all b in B ... true
+testing F_1 = 0 ... true
+testing F_2 = 0 ... true
+testing F_3 = 0 ... true
+testing F_4 = 0 ... true
+testing det F_0 = ±1 ... true (det = 1; F_0 is 720 x 720)
+testing t(b⁻¹ T_π) = 0 for all b ≠ 1 in B ... true
+testing t(T_π) = 1 ... true
+                                                                                  [time 2.7 s, memory 0.91 GB]
+==== Result (mod 15013) ======================================================================================
+all 14 tests true
+predicted: det Gram(τ_B) = ± c0^63600 d0^41900 e0^97600
+==============================================================================================================
+                                                                      [total time 56.2 s, peak memory 0.91 GB]
+# 2026-11-05 14:09:34  exit code 0

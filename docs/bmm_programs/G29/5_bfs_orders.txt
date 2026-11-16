@@ -1,0 +1,180 @@
+# 2026-11-05 14:02:31  julia programs/bfs_orders.jl G29
+==============================================================================================================
+ H(G29): the tree candidates BFS_o, o in the families of Figure 2, mod p (bmm.pdf, Section 3.3)  bfs_orders.jl, 2026-11-05 14:02 
+==============================================================================================================
+W = G29, |W| = 7680; generators s1, s2, s3, s4 of order 2; s1 s2 s1 = s2 s1 s2; s2 s4 s2 = s4 s2 s4;
+    s3 s4 s3 = s4 s3 s4; s2 s3 s2 s3 = s3 s2 s3 s2; s1 s3 = s3 s1; s1 s4 = s4 s1;
+    s4 s3 s2 s4 s3 s2 = s3 s2 s4 s3 s2 s4
+T_s1² = e1 T_s1 + e0 (same for T_s2, T_s3, T_s4)
+U = <s1>, e = 2, 3840 cosets; z = s1 s2 s4 s3 s1 s2 s4 s3 s1 s2 s4 s3 s1 s2 s4 s3 s1 s2 s4 s3; π = z⁴
+p = 15013; e1 = 11; e0 = 1; A = BFS_(s1, s2, s3, s4); τ = can_trace
+table: do the sweeps of setRow's complete the coset table of BFS_o;  det: det CBM(A, BFS_o) (not computed: |W| > 2500);  quasi-symmetric: τ(a) = δ_(a,1) on BFS_o (else: number of nonzero values)
+==== W and the trace =========================================================================================
+testing in W: s1, s2, s3, s4 have orders 2, 2, 2, 2 ... true
+testing in W: s1 s2 s1 = s2 s1 s2 ... true
+testing in W: s2 s4 s2 = s4 s2 s4 ... true
+testing in W: s3 s4 s3 = s4 s3 s4 ... true
+testing in W: s2 s3 s2 s3 = s3 s2 s3 s2 ... true
+testing in W: s1 s3 = s3 s1 ... true
+testing in W: s1 s4 = s4 s1 ... true
+testing in W: s4 s3 s2 s4 s3 s2 = s3 s2 s4 s3 s2 s4 ... true
+testing in W: z = s1 s2 s4 s3 s1 s2 s4 s3 s1 s2 s4 s3 s1 s2 s4 s3 s1 s2 s4 s3 is central ... true (z has order 4 in W)
+                                                                                  [time 3.3 s, memory 0.90 GB]
+==== Family (1): orders of S (24 orders) =====================================================================
+o = (s1, s2, s3, s4)   table complete (12 sweeps)   quasi-symmetric yes
+o = (s1, s2, s4, s3)   table complete (12 sweeps)   quasi-symmetric yes
+o = (s1, s3, s2, s4)   table complete (12 sweeps)   quasi-symmetric yes
+o = (s1, s3, s4, s2)   table complete (12 sweeps)   quasi-symmetric no (7)
+o = (s1, s4, s2, s3)   table complete (12 sweeps)   quasi-symmetric no (1)
+o = (s1, s4, s3, s2)   table complete (12 sweeps)   quasi-symmetric no (7)
+o = (s2, s1, s3, s4)   table complete (12 sweeps)   quasi-symmetric yes
+o = (s2, s1, s4, s3)   table complete (12 sweeps)   quasi-symmetric yes
+o = (s2, s3, s1, s4)   table complete (13 sweeps)   quasi-symmetric yes
+o = (s2, s3, s4, s1)   table complete (13 sweeps)   quasi-symmetric yes
+o = (s2, s4, s1, s3)   table complete (12 sweeps)   quasi-symmetric yes
+o = (s2, s4, s3, s1)   table complete (13 sweeps)   quasi-symmetric yes
+o = (s3, s1, s2, s4)   table complete (12 sweeps)   quasi-symmetric yes
+o = (s3, s1, s4, s2)   table complete (12 sweeps)   quasi-symmetric no (7)
+o = (s3, s2, s1, s4)   table complete (12 sweeps)   quasi-symmetric yes
+o = (s3, s2, s4, s1)   table complete (13 sweeps)   quasi-symmetric yes
+o = (s3, s4, s1, s2)   table complete (12 sweeps)   quasi-symmetric no (7)
+o = (s3, s4, s2, s1)   table complete (12 sweeps)   quasi-symmetric yes
+o = (s4, s1, s2, s3)   table complete (12 sweeps)   quasi-symmetric no (1)
+o = (s4, s1, s3, s2)   table complete (12 sweeps)   quasi-symmetric no (7)
+o = (s4, s2, s1, s3)   table complete (12 sweeps)   quasi-symmetric no (1)
+o = (s4, s2, s3, s1)   table complete (14 sweeps)   quasi-symmetric yes
+o = (s4, s3, s1, s2)   table complete (12 sweeps)   quasi-symmetric no (7)
+o = (s4, s3, s2, s1)   table complete (12 sweeps)   quasi-symmetric yes
+                                                                                 [time 50.4 s, memory 1.55 GB]
+==== Family (2): orders of S ∪ {z} (120 orders) ==============================================================
+o = (s1, s2, s3, s4, z) table open (6107 rows)       quasi-symmetric yes
+o = (s1, s2, s3, z, s4) table open (6117 rows)       quasi-symmetric yes
+o = (s1, s2, s4, s3, z) table open (6038 rows)       quasi-symmetric yes
+o = (s1, s2, s4, z, s3) table open (6038 rows)       quasi-symmetric yes
+o = (s1, s2, z, s3, s4) table open (6083 rows)       quasi-symmetric yes
+o = (s1, s2, z, s4, s3) table open (6078 rows)       quasi-symmetric yes
+o = (s1, s3, s2, s4, z) table open (5937 rows)       quasi-symmetric yes
+o = (s1, s3, s2, z, s4) table open (5937 rows)       quasi-symmetric yes
+o = (s1, s3, s4, s2, z) table open (5888 rows)       quasi-symmetric yes
+o = (s1, s3, s4, z, s2) table open (5888 rows)       quasi-symmetric yes
+o = (s1, s3, z, s2, s4) table open (5959 rows)       quasi-symmetric yes
+o = (s1, s3, z, s4, s2) table open (6119 rows)       quasi-symmetric yes
+o = (s1, s4, s2, s3, z) table open (6842 rows)       quasi-symmetric yes
+o = (s1, s4, s2, z, s3) table open (6832 rows)       quasi-symmetric yes
+o = (s1, s4, s3, s2, z) table open (7058 rows)       quasi-symmetric yes
+o = (s1, s4, s3, z, s2) table open (7058 rows)       quasi-symmetric yes
+o = (s1, s4, z, s2, s3) table open (6804 rows)       quasi-symmetric yes
+o = (s1, s4, z, s3, s2) table open (6906 rows)       quasi-symmetric yes
+o = (s1, z, s2, s3, s4) table open (6391 rows)       quasi-symmetric yes
+o = (s1, z, s2, s4, s3) table open (6366 rows)       quasi-symmetric yes
+o = (s1, z, s3, s2, s4) table open (6351 rows)       quasi-symmetric yes
+o = (s1, z, s3, s4, s2) table open (6447 rows)       quasi-symmetric yes
+o = (s1, z, s4, s2, s3) table open (7059 rows)       quasi-symmetric yes
+o = (s1, z, s4, s3, s2) table open (7090 rows)       quasi-symmetric yes
+o = (s2, s1, s3, s4, z) table open (6107 rows)       quasi-symmetric yes
+o = (s2, s1, s3, z, s4) table open (6117 rows)       quasi-symmetric yes
+o = (s2, s1, s4, s3, z) table open (6038 rows)       quasi-symmetric yes
+o = (s2, s1, s4, z, s3) table open (6038 rows)       quasi-symmetric yes
+o = (s2, s1, z, s3, s4) table open (6083 rows)       quasi-symmetric yes
+o = (s2, s1, z, s4, s3) table open (6078 rows)       quasi-symmetric yes
+o = (s2, s3, s1, s4, z) table open (6144 rows)       quasi-symmetric yes
+o = (s2, s3, s1, z, s4) table open (6154 rows)       quasi-symmetric yes
+o = (s2, s3, s4, s1, z) table open (6122 rows)       quasi-symmetric yes
+o = (s2, s3, s4, z, s1) table open (6122 rows)       quasi-symmetric yes
+o = (s2, s3, z, s1, s4) table open (6158 rows)       quasi-symmetric yes
+o = (s2, s3, z, s4, s1) table open (6109 rows)       quasi-symmetric yes
+o = (s2, s4, s1, s3, z) table open (6453 rows)       quasi-symmetric yes
+o = (s2, s4, s1, z, s3) table open (6453 rows)       quasi-symmetric yes
+o = (s2, s4, s3, s1, z) table open (6363 rows)       quasi-symmetric yes
+o = (s2, s4, s3, z, s1) table open (6363 rows)       quasi-symmetric yes
+o = (s2, s4, z, s1, s3) table open (6439 rows)       quasi-symmetric yes
+o = (s2, s4, z, s3, s1) table open (6331 rows)       quasi-symmetric yes
+o = (s2, z, s1, s3, s4) table open (6387 rows)       quasi-symmetric yes
+o = (s2, z, s1, s4, s3) table open (6345 rows)       quasi-symmetric yes
+o = (s2, z, s3, s1, s4) table open (6338 rows)       quasi-symmetric yes
+o = (s2, z, s3, s4, s1) table open (6280 rows)       quasi-symmetric yes
+o = (s2, z, s4, s1, s3) table open (6345 rows)       quasi-symmetric yes
+o = (s2, z, s4, s3, s1) table open (6280 rows)       quasi-symmetric yes
+o = (s3, s1, s2, s4, z) table open (5937 rows)       quasi-symmetric yes
+o = (s3, s1, s2, z, s4) table open (5937 rows)       quasi-symmetric yes
+o = (s3, s1, s4, s2, z) table open (5888 rows)       quasi-symmetric yes
+o = (s3, s1, s4, z, s2) table open (5888 rows)       quasi-symmetric yes
+o = (s3, s1, z, s2, s4) table open (5959 rows)       quasi-symmetric yes
+o = (s3, s1, z, s4, s2) table open (6119 rows)       quasi-symmetric yes
+o = (s3, s2, s1, s4, z) table open (5951 rows)       quasi-symmetric yes
+o = (s3, s2, s1, z, s4) table open (5951 rows)       quasi-symmetric yes
+o = (s3, s2, s4, s1, z) table open (5930 rows)       quasi-symmetric yes
+o = (s3, s2, s4, z, s1) table open (5930 rows)       quasi-symmetric yes
+o = (s3, s2, z, s1, s4) table open (5965 rows)       quasi-symmetric yes
+o = (s3, s2, z, s4, s1) table open (5943 rows)       quasi-symmetric yes
+o = (s3, s4, s1, s2, z) table open (5888 rows)       quasi-symmetric yes
+o = (s3, s4, s1, z, s2) table open (5888 rows)       quasi-symmetric yes
+o = (s3, s4, s2, s1, z) table open (5871 rows)       quasi-symmetric yes
+o = (s3, s4, s2, z, s1) table open (5871 rows)       quasi-symmetric yes
+o = (s3, s4, z, s1, s2) table open (5888 rows)       quasi-symmetric yes
+o = (s3, s4, z, s2, s1) table open (5871 rows)       quasi-symmetric yes
+o = (s3, z, s1, s2, s4) table open (5959 rows)       quasi-symmetric yes
+o = (s3, z, s1, s4, s2) table open (6119 rows)       quasi-symmetric yes
+o = (s3, z, s2, s1, s4) table open (5957 rows)       quasi-symmetric yes
+o = (s3, z, s2, s4, s1) table open (5939 rows)       quasi-symmetric yes
+o = (s3, z, s4, s1, s2) table open (6119 rows)       quasi-symmetric yes
+o = (s3, z, s4, s2, s1) table open (6113 rows)       quasi-symmetric yes
+o = (s4, s1, s2, s3, z) table open (6824 rows)       quasi-symmetric yes
+o = (s4, s1, s2, z, s3) table open (6814 rows)       quasi-symmetric yes
+o = (s4, s1, s3, s2, z) table open (7058 rows)       quasi-symmetric yes
+o = (s4, s1, s3, z, s2) table open (7058 rows)       quasi-symmetric yes
+o = (s4, s1, z, s2, s3) table open (6804 rows)       quasi-symmetric yes
+o = (s4, s1, z, s3, s2) table open (6906 rows)       quasi-symmetric yes
+o = (s4, s2, s1, s3, z) table open (6824 rows)       quasi-symmetric yes
+o = (s4, s2, s1, z, s3) table open (6814 rows)       quasi-symmetric yes
+o = (s4, s2, s3, s1, z) table open (6667 rows)       quasi-symmetric yes
+o = (s4, s2, s3, z, s1) table open (6667 rows)       quasi-symmetric yes
+o = (s4, s2, z, s1, s3) table open (6809 rows)       quasi-symmetric yes
+o = (s4, s2, z, s3, s1) table open (6657 rows)       quasi-symmetric yes
+o = (s4, s3, s1, s2, z) table open (7058 rows)       quasi-symmetric yes
+o = (s4, s3, s1, z, s2) table open (7058 rows)       quasi-symmetric yes
+o = (s4, s3, s2, s1, z) table open (7026 rows)       quasi-symmetric yes
+o = (s4, s3, s2, z, s1) table open (7026 rows)       quasi-symmetric yes
+o = (s4, s3, z, s1, s2) table open (7058 rows)       quasi-symmetric yes
+o = (s4, s3, z, s2, s1) table open (7026 rows)       quasi-symmetric yes
+o = (s4, z, s1, s2, s3) table open (6804 rows)       quasi-symmetric yes
+o = (s4, z, s1, s3, s2) table open (6906 rows)       quasi-symmetric yes
+o = (s4, z, s2, s1, s3) table open (6804 rows)       quasi-symmetric yes
+o = (s4, z, s2, s3, s1) table open (6689 rows)       quasi-symmetric yes
+o = (s4, z, s3, s1, s2) table open (6906 rows)       quasi-symmetric yes
+o = (s4, z, s3, s2, s1) table open (6890 rows)       quasi-symmetric yes
+o = (z, s1, s2, s3, s4) table open (6391 rows)       quasi-symmetric yes
+o = (z, s1, s2, s4, s3) table open (6366 rows)       quasi-symmetric yes
+o = (z, s1, s3, s2, s4) table open (6351 rows)       quasi-symmetric yes
+o = (z, s1, s3, s4, s2) table open (6447 rows)       quasi-symmetric yes
+o = (z, s1, s4, s2, s3) table open (7059 rows)       quasi-symmetric yes
+o = (z, s1, s4, s3, s2) table open (7090 rows)       quasi-symmetric yes
+o = (z, s2, s1, s3, s4) table open (6391 rows)       quasi-symmetric yes
+o = (z, s2, s1, s4, s3) table open (6366 rows)       quasi-symmetric yes
+o = (z, s2, s3, s1, s4) table open (6274 rows)       quasi-symmetric yes
+o = (z, s2, s3, s4, s1) table open (6249 rows)       quasi-symmetric yes
+o = (z, s2, s4, s1, s3) table open (6366 rows)       quasi-symmetric yes
+o = (z, s2, s4, s3, s1) table open (6266 rows)       quasi-symmetric yes
+o = (z, s3, s1, s2, s4) table open (6351 rows)       quasi-symmetric yes
+o = (z, s3, s1, s4, s2) table open (6447 rows)       quasi-symmetric yes
+o = (z, s3, s2, s1, s4) table open (6343 rows)       quasi-symmetric yes
+o = (z, s3, s2, s4, s1) table open (6319 rows)       quasi-symmetric yes
+o = (z, s3, s4, s1, s2) table open (6447 rows)       quasi-symmetric yes
+o = (z, s3, s4, s2, s1) table open (6431 rows)       quasi-symmetric yes
+o = (z, s4, s1, s2, s3) table open (7059 rows)       quasi-symmetric yes
+o = (z, s4, s1, s3, s2) table open (7090 rows)       quasi-symmetric yes
+o = (z, s4, s2, s1, s3) table open (7059 rows)       quasi-symmetric yes
+o = (z, s4, s2, s3, s1) table open (6967 rows)       quasi-symmetric yes
+o = (z, s4, s3, s1, s2) table open (7090 rows)       quasi-symmetric yes
+o = (z, s4, s3, s2, s1) table open (7060 rows)       quasi-symmetric yes
+                                                                             [time 5 min 00 s, memory 1.55 GB]
+==== Family (3): orders of S ∪ {z} without one generator (96 orders) =========================================
+96 orders do not reach all cosets
+                                                                                  [time 0.0 s, memory 1.55 GB]
+==== Result (mod 15013) ======================================================================================
+family (1), 24 orders: table complete 24, quasi-symmetric 15
+family (2), 120 orders: table complete 0, quasi-symmetric 120
+family (3), 0 orders: table complete 0, quasi-symmetric 0
+==============================================================================================================
+                                                                  [total time 5 min 58 s, peak memory 1.55 GB]
+# 2026-11-05 14:08:25  exit code 0

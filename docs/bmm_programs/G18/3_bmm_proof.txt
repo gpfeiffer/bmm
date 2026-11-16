@@ -1,0 +1,52 @@
+# 2026-11-09 11:35:38  julia programs/bmm_proof.jl G18/group18.toml
+==============================================================================================================
+ H(G18): exact proof of Proposition 4.17 and Theorem 4.18 of bmm.pdf           bmm_proof.jl, 2026-11-09 11:35 
+==============================================================================================================
+W = G18, |W| = 1800; generators t, u of orders 3, 5; t u t u = u t u t
+T_t³ = c2 T_t² + c1 T_t + c0; T_u⁵ = d4 T_u⁴ + d3 T_u³ + d2 T_u² + d1 T_u + d0
+U = <u>, e = 5, 360 cosets; z = t u t u; π = z³⁰
+A = BFS_(t, u) (cosettable18.txt); B = { T_z^(6j) T_u^m T_x : j < 5, m < 5, x in X }, |X| = 72 (basis18.txt)
+computed over R' = Z[c1, c2, d1, d2, d3, d4], c0 = d0 = 1
+==== Coset table of A (Section 3.3, Proposition 3.8) =========================================================
+testing all 1440 setRow's compile ... true (2160 rows, 97063 nonzero entries)
+                                                                                 [time 10.1 s, memory 1.11 GB]
+==== Relations of H on the table =============================================================================
+testing T_t³ = c2 T_t² + c1 T_t + 1 ... true
+testing T_u⁵ = d4 T_u⁴ + d3 T_u³ + d2 T_u² + d1 T_u + 1 ... true
+testing T_t T_t⁻¹ = 1 ... true
+testing T_u T_u⁻¹ = 1 ... true
+testing T_z T_z⁻¹ = 1 ... true
+testing T_t T_u T_t T_u = T_u T_t T_u T_t ... true
+testing T_z = T_t T_u T_t T_u ... true
+testing T_z T_t = T_t T_z ... true
+testing T_z T_u = T_u T_z ... true
+                                                                                 [time 24.3 s, memory 1.18 GB]
+==== Linear form t (can_trace): symmetry (Proposition 4.11) and values on B ==================================
+t(h) = [T_u⁴ T_(w_337)] (T_z⁻⁶ h), [a] = coefficient of a in A
+testing t(a T_t) = t(T_t a) for all a in A ... true
+testing t(a T_u) = t(T_u a) for all a in A ... true
+testing t(b) = δ_(b,1) for all b in B ... true
+                                                                                 [time 13.7 s, memory 1.18 GB]
+==== Gram_t(B, B⁻¹): blocks F_r = ( t(T_z^(6r) b b'⁻¹) ), b, b' in UX, r > 0 (Lemma 4.16) ====================
+testing F_1 = 0 ... true
+testing F_2 = 0 ... true
+testing F_3 = 0 ... true
+testing F_4 = 0 ... true
+                                                                                 [time 17.1 s, memory 1.46 GB]
+==== Block F_0 ===============================================================================================
+F_0: 360 x 360, 58429 nonzero entries, 1484335 terms, largest coefficient 42756
+                                                                                  [time 0.7 s, memory 1.46 GB]
+==== det F_0 (Lemma 4.13) ====================================================================================
+testing det F_0 = ±1 ... true (det F_0 = 1; diagonal blocks 315, 25, 1 (x 20))
+                                                                                  [time 8.7 s, memory 2.68 GB]
+==== Condition (3) of the conjecture =========================================================================
+testing t(b⁻¹ T_π) = 0 for all b ≠ 1 in B ... true
+testing t(T_π) = 1 ... true
+                                                                                 [time 12.6 s, memory 2.68 GB]
+==== Result ==================================================================================================
+all 20 tests true; B is an R-basis and τ_B = t satisfies the BMM conjecture (Proposition 4.17, Theorem 4.18)
+degree 2 Σ w(b) = (95100, 111150), exponents 95100/3, 111150/5; sign (−1)^((1800 − 2)/2)
+det Gram(τ_B) = - c0^31700 d0^22230   (bmm.pdf, Table 2: the same)
+==============================================================================================================
+                                                                  [total time 1 min 33 s, peak memory 2.68 GB]
+# 2026-11-09 11:37:05  exit code 0

@@ -1,0 +1,21 @@
+# H(G19): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G19"
+order        = 3600
+letters      = ["s", "t", "u"]            # letter 1 = s, 2 = t, 3 = u; letter 4 = z
+orders       = [2, 3, 5]
+classes      = [1, 2, 3]                  # three classes of reflections: {s}, {t}, {u}
+params       = [["e0", "e1"], ["c0", "c1", "c2"], ["d0", "d1", "d2", "d3", "d4"]]   # T_s^2 = e1 T + e0, T_t^3 = c2 T^2 + c1 T + c0, T_u^5 = d4 T^4 + ... + d0
+chevie_group = 19
+chevie       = [1, 2, 3]
+braid        = ["1,2,3 = 2,3,1", "1,2,3 = 3,1,2"]
+parabolic    = 3                          # U = <u>
+zword        = "1,2,3"                    # z = s t u, central of order 60 in W
+zstep        = 12                         # B is a z^12-basis (z^12 has order 5 = o(u) in W)
+zlevels      = 5
+pipower      = 60                         # T_pi = T_z^60
+bfs          = "4,1,2,3"                  # the order o of BFS_o: z first
+basis        = "basis19.txt"
+table        = "cosettable19.txt"
+trace        = "3,704,4"                  # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h
+bmm_table    = "+c0^63600 d0^41900 e0^97600"
+split        = 1                          # F_0 computed as t(z^-12 b · b'^-1 z^12): the functionals of level 1 are much sparser than those of level 0

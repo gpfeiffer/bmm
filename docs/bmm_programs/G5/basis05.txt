@@ -1,0 +1,7 @@
+# The set X of the z-basis B = {s^m z^κ x : 0 <= m < 3, 0 <= κ < 6, x in X} of H(G5), z = s t s t; letters 1 = s, 2 = t.
+# The words of a spanning tree of the coset graph of U Z^k in W (BFS, order s,t), found by search.jl modulo 15013.
+# One word per line, letters separated by commas; e is the empty word; a negative letter is an inverse.
+e
+2
+2,1
+2,1,1

@@ -1,0 +1,45 @@
+# 2026-11-05 13:47:10  julia programs/bfs_basis.jl G20
+==============================================================================================================
+ H(G20): the BFS basis A = BFS_o and its coset table, mod p (bmm.pdf, Section 3)  bfs_basis.jl, 2026-11-05 13:47 
+==============================================================================================================
+W = G20, |W| = 360; generators a, b of order 3; a b a b a = b a b a b
+T_a³ = c2 T_a² + c1 T_a + c0 (same for T_b)
+U = <a>, e = 3, 120 cosets; z = a b a b a b a b a b; π = z⁶
+o = (a, b)
+==== Tree BFS_o (Section 3.2), in W ==========================================================================
+testing in W: a, b have orders 3, 3 ... true
+testing in W: a b a b a = b a b a b ... true
+testing in W: z = a b a b a b a b a b is central ... true (z has order 6 in W)
+nodes per level: 1, 1, 2, 3, 5, 7, 10, 13, 15, 14, 15, 13, 11, 6, 3, 1
+testing the tree reaches all 120 cosets of U ... true
+                                                                                  [time 2.1 s, memory 0.72 GB]
+==== Coset table CT_A by sweeps of setRow's (Section 3.3) ====================================================
+p = 15013; c1, c2 = -6487, -476; c0 = 1
+sweep 1: 98 setRow's (gen 43, inv 46, rel 9), 382 rows open
+sweep 2: 65 setRow's (gen 5, inv 5, rel 55), 317 rows open
+sweep 3: 70 setRow's (gen 5, inv 9, rel 56), 247 rows open
+sweep 4: 84 setRow's (gen 4, inv 3, rel 77), 163 rows open
+sweep 5: 40 setRow's (gen 6, inv 4, rel 30), 123 rows open
+sweep 6: 35 setRow's (gen 3, inv 3, rel 29), 88 rows open
+sweep 7: 39 setRow's (gen 5, inv 5, rel 29), 49 rows open
+sweep 8: 39 setRow's (gen 9, inv 2, rel 28), 10 rows open
+sweep 9: 9 setRow's (gen 2, inv 2, rel 5), 1 rows open
+sweep 10: 1 setRow's (gen 0, inv 0, rel 1), 0 rows open
+testing the table is complete ... true (119 tree edges, 480 setRow's, 10 sweeps)
+                                                                                  [time 1.3 s, memory 0.72 GB]
+==== Relations of H on the table =============================================================================
+testing T_a³ = c2 T_a² + c1 T_a + 1 ... true
+testing T_b³ = c2 T_b² + c1 T_b + 1 ... true
+testing T_a T_a⁻¹ = 1 ... true
+testing T_b T_b⁻¹ = 1 ... true
+testing T_z T_z⁻¹ = 1 ... true
+testing T_a T_b T_a T_b T_a = T_b T_a T_b T_a T_b ... true
+testing T_z = T_a T_b T_a T_b T_a T_b T_a T_b T_a T_b ... true
+testing T_z T_a = T_a T_z ... true
+testing T_z T_b = T_b T_z ... true
+                                                                                  [time 0.7 s, memory 0.72 GB]
+==== Result (mod 15013) ======================================================================================
+all 14 tests true; written cosettable20.txt (executed exactly by bmm_proof.jl)
+==============================================================================================================
+                                                                       [total time 9.1 s, peak memory 0.72 GB]
+# 2026-11-05 13:47:14  exit code 0

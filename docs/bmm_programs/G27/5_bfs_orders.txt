@@ -1,0 +1,62 @@
+# 2026-11-05 13:57:27  julia programs/bfs_orders.jl G27
+==============================================================================================================
+ H(G27): the tree candidates BFS_o, o in the families of Figure 2, mod p (bmm.pdf, Section 3.3)  bfs_orders.jl, 2026-11-05 13:57 
+==============================================================================================================
+W = G27, |W| = 2160; generators s1, s2, s3 of order 2; s2 s1 s2 = s1 s2 s1; s3 s1 s3 = s1 s3 s1;
+    s3 s2 s3 s2 = s2 s3 s2 s3; s3 s2 s3 s1 s2 s3 s1 s2 s3 s1 s2 s3 = s2 s3 s1 s2 s3 s1 s2 s3 s1 s2 s3 s2
+T_s1² = e1 T_s1 + e0 (same for T_s2, T_s3)
+U = <s1>, e = 2, 1080 cosets; z = s1 s2 s3 s1 s2 s3 s1 s2 s3 s1 s2 s3 s1 s2 s3; π = z⁶
+p = 15013; e1 = 11; e0 = 1; A = BFS_(s1, s2, s3); τ = can_trace
+table: do the sweeps of setRow's complete the coset table of BFS_o;  det: det CBM(A, BFS_o);  quasi-symmetric: τ(a) = δ_(a,1) on BFS_o (else: number of nonzero values)
+==== W and the trace =========================================================================================
+testing in W: s1, s2, s3 have orders 2, 2, 2 ... true
+testing in W: s2 s1 s2 = s1 s2 s1 ... true
+testing in W: s3 s1 s3 = s1 s3 s1 ... true
+testing in W: s3 s2 s3 s2 = s2 s3 s2 s3 ... true
+testing in W: s3 s2 s3 s1 s2 s3 s1 s2 s3 s1 s2 s3 = s2 s3 s1 s2 s3 s1 s2 s3 s1 s2 s3 s2 ... true
+testing in W: z = s1 s2 s3 s1 s2 s3 s1 s2 s3 s1 s2 s3 s1 s2 s3 is central ... true (z has order 6 in W)
+                                                                                  [time 2.6 s, memory 0.75 GB]
+==== Family (1): orders of S (6 orders) ======================================================================
+o = (s1, s2, s3)       table complete (10 sweeps)   det      1  quasi-symmetric no (1)
+o = (s1, s3, s2)       table complete (11 sweeps)   det      1  quasi-symmetric no (1)
+o = (s2, s1, s3)       table complete (10 sweeps)   det      1  quasi-symmetric no (1)
+o = (s2, s3, s1)       table complete (11 sweeps)   det      1  quasi-symmetric no (1)
+o = (s3, s1, s2)       table complete (11 sweeps)   det      1  quasi-symmetric no (1)
+o = (s3, s2, s1)       table complete (11 sweeps)   det      1  quasi-symmetric no (1)
+                                                                                  [time 3.8 s, memory 0.86 GB]
+==== Family (2): orders of S ∪ {z} (24 orders) ===============================================================
+o = (s1, s2, s3, z)    table open (1372 rows)       det  -3139  quasi-symmetric yes
+o = (s1, s2, z, s3)    table open (1360 rows)       det   3544  quasi-symmetric yes
+o = (s1, s3, s2, z)    table open (1371 rows)       det   5765  quasi-symmetric yes
+o = (s1, s3, z, s2)    table open (1359 rows)       det   5765  quasi-symmetric yes
+o = (s1, z, s2, s3)    table open (1321 rows)       det   3424  quasi-symmetric yes
+o = (s1, z, s3, s2)    table open (1323 rows)       det   3424  quasi-symmetric yes
+o = (s2, s1, s3, z)    table open (1389 rows)       det   3544  quasi-symmetric yes
+o = (s2, s1, z, s3)    table open (1360 rows)       det   3544  quasi-symmetric yes
+o = (s2, s3, s1, z)    table open (1386 rows)       det  -5648  quasi-symmetric yes
+o = (s2, s3, z, s1)    table open (1386 rows)       det  -5648  quasi-symmetric yes
+o = (s2, z, s1, s3)    table open (1355 rows)       det   3544  quasi-symmetric yes
+o = (s2, z, s3, s1)    table open (1357 rows)       det   3544  quasi-symmetric yes
+o = (s3, s1, s2, z)    table open (1371 rows)       det   5258  quasi-symmetric yes
+o = (s3, s1, z, s2)    table open (1359 rows)       det   5765  quasi-symmetric yes
+o = (s3, s2, s1, z)    table open (1409 rows)       det   2614  quasi-symmetric yes
+o = (s3, s2, z, s1)    table open (1409 rows)       det   2614  quasi-symmetric yes
+o = (s3, z, s1, s2)    table open (1350 rows)       det  -1437  quasi-symmetric yes
+o = (s3, z, s2, s1)    table open (1371 rows)       det  -1437  quasi-symmetric yes
+o = (z, s1, s2, s3)    table open (1321 rows)       det   3424  quasi-symmetric yes
+o = (z, s1, s3, s2)    table open (1323 rows)       det   3424  quasi-symmetric yes
+o = (z, s2, s1, s3)    table open (1321 rows)       det   3424  quasi-symmetric yes
+o = (z, s2, s3, s1)    table open (1322 rows)       det   3424  quasi-symmetric yes
+o = (z, s3, s1, s2)    table open (1323 rows)       det   3424  quasi-symmetric yes
+o = (z, s3, s2, s1)    table open (1322 rows)       det   3424  quasi-symmetric yes
+                                                                                 [time 25.4 s, memory 0.90 GB]
+==== Family (3): orders of S ∪ {z} without one generator (18 orders) =========================================
+18 orders do not reach all cosets
+                                                                                  [time 0.0 s, memory 0.90 GB]
+==== Result (mod 15013) ======================================================================================
+family (1), 6 orders: table complete 6, det = ±1 6, quasi-symmetric 0
+family (2), 24 orders: table complete 0, det = ±1 0, quasi-symmetric 24
+family (3), 0 orders: table complete 0, det = ±1 0, quasi-symmetric 0
+==============================================================================================================
+                                                                      [total time 37.0 s, peak memory 0.90 GB]
+# 2026-11-05 13:57:59  exit code 0

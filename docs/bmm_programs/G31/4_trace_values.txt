@@ -1,0 +1,34 @@
+# 2026-11-12 16:36:23  julia programs/trace_values.jl G31/group31.toml
+==============================================================================================================
+ H(G31): values of the canonical trace τ (can_trace)                        trace_values.jl, 2026-11-12 16:36 
+==============================================================================================================
+W = G31, |W| = 46080; generators s1, s2, s3, s4, s5 of order 2; s1 s4 s1 = s4 s1 s4; s1 s5 = s5 s1;
+    s2 s4 s2 = s4 s2 s4; s2 s5 s2 = s5 s2 s5; s3 s4 = s4 s3; s3 s5 s3 = s5 s3 s5; s4 s5 = s5 s4;
+    s1 s2 s3 = s2 s3 s1; s1 s2 s3 = s3 s1 s2
+T_s1² = e1 T_s1 + e0 (same for T_s2, T_s3, T_s4, T_s5)
+tower 1 < <s5> < <s3, s5> < <s1, s2, s3, s5> < W (engine tower);
+    z = s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5; π = z⁴
+==== Coset table of A ========================================================================================
+H(A2) = ⊕ H(<s5>) x_n: 3 cosets, the table closes by the setRow procedure (bmm.pdf §3.3); rank 6
+H(G(4,2,3)) = ⊕ H(A2) x_n: 32 cosets, the table closes by the setRow procedure (bmm.pdf §3.3); rank 192
+H(G31) = ⊕ H(P) x_n: 240 cosets, the table completed by the exact execution of the 2633 lines of cosettable31.txt  [8 min 51 s, 1.60 GB]
+testing T_z is central: T_z T_s = T_s T_z for s = s1, s2, s3, s4, s5 ... true
+                                                                             [time 8 min 36 s, memory 1.60 GB]
+==== Values of τ =============================================================================================
+exact values in R = Z[e1][e0^±1] (computed with e0 = 1, lifted by degree)
+τ(T_s1⁻²) = e0^-1 + e0^-2*e1^2
+τ(T_s1⁻¹) = -e0^-1*e1
+τ(T_s1) = 0
+τ(T_s1²) = e0
+τ(T_s1 T_s2) = 0
+τ(T_s1 T_s2⁻¹) = 0
+τ(T_s1⁻¹ T_s2⁻¹) = e0^-2*e1^2
+τ(T_s1 T_s2 T_s3 T_s4 T_s5) = 0
+τ(T_z) = 0
+τ(T_z⁻¹) = 255*e0^-18*e1^6 + 2136*e0^-19*e1^8 + 9507*e0^-20*e1^10 + 25951*e0^-21*e1^12 + 44870*e0^-22*e1^14 +
+    50860*e0^-23*e1^16 + 38881*e0^-24*e1^18 + 20366*e0^-25*e1^20 + 7316*e0^-26*e1^22 + 1771*e0^-27*e1^24 +
+    276*e0^-28*e1^26 + 25*e0^-29*e1^28 + e0^-30*e1^30
+τ(T_s1 T_s2 T_s1⁻¹) = 0
+==============================================================================================================
+                                                                  [total time 8 min 52 s, peak memory 1.60 GB]
+# 2026-11-12 16:45:00  exit code 0

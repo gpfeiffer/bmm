@@ -1,0 +1,39 @@
+# 2026-11-12 11:47:36  julia programs/trace_values.jl G33/group33.toml
+==============================================================================================================
+ H(G33): values of the canonical trace τ (can_trace)                        trace_values.jl, 2026-11-12 11:47 
+==============================================================================================================
+W = G33, |W| = 51840; generators s1, s2, s3, s4, s5 of order 2; s1 s2 s1 = s2 s1 s2; s1 s3 = s3 s1;
+    s1 s4 = s4 s1; s1 s5 = s5 s1; s2 s3 s2 = s3 s2 s3; s2 s4 s2 = s4 s2 s4; s2 s5 = s5 s2;
+    s3 s4 s3 = s4 s3 s4; s3 s5 = s5 s3; s4 s5 s4 = s5 s4 s5; s4 s2 s3 s4 s2 s3 = s3 s4 s2 s3 s4 s2;
+    s3 s4 s2 s3 s4 s2 = s2 s3 s4 s2 s3 s4
+T_s1² = e1 T_s1 + e0 (same for T_s2, T_s3, T_s4, T_s5)
+tower 1 < <s1> < <s1, s2> < <s1, s2, s4> < <s1, s2, s4, s5> < W (engine tower);
+    z = s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5 s1 s2 s3 s4 s5;
+    π = z²
+==== Coset table of A ========================================================================================
+H(A2) = ⊕ H(<s1>) x_n: 3 cosets, the table closes by the setRow procedure (bmm.pdf §3.3); rank 6
+H(A3) = ⊕ H(A2) x_n: 4 cosets, the table closes by the setRow procedure (bmm.pdf §3.3); rank 24
+H(A4) = ⊕ H(A3) x_n: 5 cosets, the table closes by the setRow procedure (bmm.pdf §3.3); rank 120
+H(G33) = ⊕ H(P) x_n: 432 cosets, the table completed by the exact execution of the 3881 lines of cosettable33.txt  [19.4 s, 1.10 GB]
+testing T_z is central: T_z T_s = T_s T_z for s = s1, s2, s3, s4, s5 ... true
+                                                                                  [time 4.1 s, memory 1.10 GB]
+==== Values of τ =============================================================================================
+exact values in R = Z[e1][e0^±1] (computed with e0 = 1, lifted by degree)
+τ(T_s1⁻²) = e0^-1 + e0^-2*e1^2
+τ(T_s1⁻¹) = -e0^-1*e1
+τ(T_s1) = 0
+τ(T_s1²) = e0
+τ(T_s1 T_s2) = 0
+τ(T_s1 T_s2⁻¹) = 0
+τ(T_s1⁻¹ T_s2⁻¹) = e0^-2*e1^2
+τ(T_s1 T_s2 T_s3 T_s4 T_s5) = 0
+τ(T_z) = 0
+τ(T_z⁻¹) = -27*e0^-25*e1^5 - 900*e0^-26*e1^7 - 21313*e0^-27*e1^9 - 241200*e0^-28*e1^11 - 1500902*e0^-29*e1^13
+    - 5918448*e0^-30*e1^15 - 15992660*e0^-31*e1^17 - 31020256*e0^-32*e1^19 - 44540542*e0^-33*e1^21 -
+    48378120*e0^-34*e1^23 - 40356026*e0^-35*e1^25 - 26111280*e0^-36*e1^27 - 13171626*e0^-37*e1^29 -
+    5182300*e0^-38*e1^31 - 1582705*e0^-39*e1^33 - 371040*e0^-40*e1^35 - 65451*e0^-41*e1^37 - 8400*e0^-42*e1^39
+    - 740*e0^-43*e1^41 - 40*e0^-44*e1^43 - e0^-45*e1^45
+τ(T_s1 T_s2 T_s1⁻¹) = 0
+==============================================================================================================
+                                                                      [total time 25.0 s, peak memory 1.25 GB]
+# 2026-11-12 11:47:45  exit code 0

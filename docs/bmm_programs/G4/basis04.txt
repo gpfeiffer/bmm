@@ -1,0 +1,7 @@
+# The set X of the z-basis B = {s1^m z^κ x : 0 <= m < 3, 0 <= κ < 2, x in X} of H(G4), z = (s1 s2)^3; letters 1 = s1, 2 = s2.
+# X = {1, s2, w, w s1} is Chavli–Pfeiffer's X4, w = s1 s2 s1 = s2 s1 s2 the half twist.
+# One word per line, in breadth-first order of the tree of X; e is the empty word; a negative letter is an inverse.
+e
+2
+1,2,1
+1,2,1,1

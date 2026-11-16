@@ -1,0 +1,51 @@
+# H(G31): the group, its tower of parabolic subgroups, the basis B and the pairing (engine tower; the fields are
+# explained at the top of lib/spec.jl, the tower and the stages of the records at the top of lib/tower/driver.jl)
+name         = "G31"
+order        = 46080
+engine       = "tower"                    # lib/tower: coset tables over H(P), filled by the setRow procedure of bmm.pdf §3.3
+letters      = ["s1", "s2", "s3", "s4", "s5"]   # letters 1..5 = s1..s5; letter 6 = z
+orders       = [2, 2, 2, 2, 2]
+classes      = [1, 1, 1, 1, 1]            # one class of reflections
+params       = [["e0", "e1"]]             # T^2 = e1 T + e0; computed over R' = Z[e1], e0 = 1
+chevie_group = 31
+braid        = ["1,4,1 = 4,1,4", "1,5 = 5,1", "2,4,2 = 4,2,4", "2,5,2 = 5,2,5", "3,4 = 4,3", "3,5,3 = 5,3,5",
+                "4,5 = 5,4", "1,2,3 = 2,3,1", "1,2,3 = 3,1,2"]   # the presentation of B(G31); every table is
+                                          # filled from the relations among its letters alone
+consequences = ["4,1,2,4,1,2 = 1,2,4,1,2,4"]    # (s4 s1 s2)^2 = (s1 s2 s4)^2: tested on the tables, never used
+zword        = "1,4,2,3,5,1,4,2,3,5,1,4,2,3,5,1,4,2,3,5,1,4,2,3,5,1,4,2,3,5"   # z = (s1 s4 s2 s3 s5)^6, of order 4 in W
+zstep        = 4                          # B = B_P . T_X has no power of z (k = |Z(W)| = 4)
+zlevels      = 1
+pipower      = 4                          # T_pi = T_z^4
+bfs          = "2,3,4,5,1"                # o = (s2, s3, s4, s5, s1): the tree X_31 = T_o(P\W) of bmm.pdf §5.3, P = <s1, s2, s3, s5>
+basis        = "basis31.txt"              # X, 240 words (written by the step bfs; the proof checks it is T_o(P\W))
+table        = "cosettable31.txt"         # the setRow program that fills the table of H(W) over H(P) on X
+trace        = "0,1,0"                    # t = tau_P o E_X, the coefficient of 1 on B = B_P . T_X
+pairing      = "ztree"                    # Proposition 5.3 with Y_1 = Y_31 = T_o'(P\W) of bmm.pdf §5.3, z a letter, and Y_2 its partners:
+pairing_bfs  = "1,2,3,4,5,6"              #   o' = (s1, s2, s3, s4, s5, z); y = w z^i is paired with rev(w) z^-i
+pairing_words = "pairing31.txt"           # Y_1, 240 words (written by the step bfs; the proof checks it is T_o'(P\W))
+zeta         = "6,6"                      # condition (3) through zeta = z^2 (zeta^2 = pi)
+steps        = ["bfs", "modular", "proof", "traces"]
+
+# The tower <s5> < A2 < P = G(4,2,3) < W, bottom first; the top level is W over the last one.  Each level: name, its
+# letters (gens), the letters of the level below (over), its order, the ordering of its coset tree (bfs), and the word
+# pi of T_pi for condition (3).  P = <s1, s2, s3, s5> is the image of the parabolic <s1, s2, s3, s4> under the
+# anti-automorphism beta = reversal o (s1 s3)(s4 s5) of B(G31): the orderings below are those of the tower
+# <s4> < <s1, s4> < <s1, s2, s3, s4> with s1 <-> s3, s4 <-> s5, and the words pi are the images under beta of theirs.
+[[level]]                                 # the bottom: H(<s5>), basis 1, T_s5
+name  = "<s5>"
+gens  = "5"
+order = 2
+[[level]]                                 # H(A2) = ⊕ H(<s5>) x_n
+name  = "A2"
+gens  = "3,5"
+over  = "5"
+order = 6
+bfs   = "3,5"
+pi    = "5,3,5,3,5,3"                     # pi = (s5 s3)^3
+[[level]]                                 # H(P) = ⊕ H(A2) x_n, P = G(4,2,3)
+name  = "G(4,2,3)"
+gens  = "1,2,3,5"
+over  = "3,5"
+order = 192
+bfs   = "3,2,1,5"
+pi    = "5,2,3,5,2,3,5,2,3,5,2,3,1,1,1,5,2,3,5,2,3,5,2,3,5,2,3,1,1,1"   # pi = ((s5 s2 s3)^4 s1^3)^2

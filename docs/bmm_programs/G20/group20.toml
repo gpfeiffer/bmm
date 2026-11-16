@@ -1,0 +1,20 @@
+# H(G20): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G20"
+order        = 360
+letters      = ["a", "b"]                 # letter 1 = a, 2 = b; letter 3 = z
+orders       = [3, 3]
+classes      = [1, 1]                     # one class of reflections
+params       = [["c0", "c1", "c2"]]       # T^3 = c2 T^2 + c1 T + c0, constant term first (c0 invertible)
+chevie_group = 20
+chevie       = [1, 2]
+braid        = ["1,2,1,2,1 = 2,1,2,1,2"]
+parabolic    = 1                          # U = <a>
+zword        = "1,2,1,2,1,2,1,2,1,2"      # z = (ab)^5, central of order 6
+zstep        = 1
+zlevels      = 6
+pipower      = 6                          # T_pi = T_z^6
+bfs          = "1,2"
+basis        = "basis20.txt"
+table        = "cosettable20.txt"
+trace        = "0,1,0"                    # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h
+bmm_table    = "-c0^6912"

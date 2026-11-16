@@ -1,0 +1,19 @@
+# H(G10): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G10"
+order        = 288
+letters      = ["s", "t"]        # letter 1 = s, 2 = t; letter 3 = z
+orders       = [3, 4]
+classes      = [1, 2]                     # 2 classes of reflections: {s}, {t}
+params       = [["c0", "c1", "c2"], ["a0", "a1", "a2", "a3"]]   # T^k = r_(k-1) T^(k-1) + ... + r_0 for each class, constant term first (invertible)
+chevie_group = 10
+chevie       = [1, 2]
+braid        = ["1,2,1,2 = 2,1,2,1"]   # s t s t = t s t s
+parabolic    = 1                          # U = <s>
+zword        = "1,2,1,2"                   # z = (s t)^2 (Δ of s t s t = t s t s), central of order 12
+zstep        = 1
+zlevels      = 12
+pipower      = 12                          # T_pi = T_z^12
+bfs          = "1,2"
+basis        = "basis10.txt"
+table        = "cosettable10.txt"
+trace        = "0,1,0"                        # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h

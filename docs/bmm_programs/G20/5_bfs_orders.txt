@@ -1,0 +1,36 @@
+# 2026-11-05 13:47:56  julia programs/bfs_orders.jl G20
+==============================================================================================================
+ H(G20): the tree candidates BFS_o, o in the families of Figure 2, mod p (bmm.pdf, Section 3.3)  bfs_orders.jl, 2026-11-05 13:47 
+==============================================================================================================
+W = G20, |W| = 360; generators a, b of order 3; a b a b a = b a b a b
+T_a³ = c2 T_a² + c1 T_a + c0 (same for T_b)
+U = <a>, e = 3, 120 cosets; z = a b a b a b a b a b; π = z⁶
+p = 15013; c1, c2 = 11, 13; c0 = 1; A = BFS_(a, b); τ = can_trace
+table: do the sweeps of setRow's complete the coset table of BFS_o;  det: det CBM(A, BFS_o);  quasi-symmetric: τ(a) = δ_(a,1) on BFS_o (else: number of nonzero values)
+==== W and the trace =========================================================================================
+testing in W: a, b have orders 3, 3 ... true
+testing in W: a b a b a = b a b a b ... true
+testing in W: z = a b a b a b a b a b is central ... true (z has order 6 in W)
+                                                                                  [time 2.8 s, memory 0.75 GB]
+==== Family (1): orders of S (2 orders) ======================================================================
+o = (a, b)             table complete (10 sweeps)   det      1  quasi-symmetric yes
+o = (b, a)             table complete (11 sweeps)   det      1  quasi-symmetric yes
+                                                                                  [time 1.4 s, memory 0.75 GB]
+==== Family (2): orders of S ∪ {z} (6 orders) ================================================================
+o = (a, b, z)          table open (172 rows)        det     -1  quasi-symmetric yes
+o = (a, z, b)          table open (169 rows)        det      1  quasi-symmetric yes
+o = (b, a, z)          table open (183 rows)        det     -1  quasi-symmetric yes
+o = (b, z, a)          table open (183 rows)        det     -1  quasi-symmetric yes
+o = (z, a, b)          table open (169 rows)        det      1  quasi-symmetric yes
+o = (z, b, a)          table open (169 rows)        det      1  quasi-symmetric yes
+                                                                                  [time 0.1 s, memory 0.75 GB]
+==== Family (3): orders of S ∪ {z} without one generator (4 orders) ==========================================
+4 orders do not reach all cosets
+                                                                                  [time 0.0 s, memory 0.75 GB]
+==== Result (mod 15013) ======================================================================================
+family (1), 2 orders: table complete 2, det = ±1 2, quasi-symmetric 2
+family (2), 6 orders: table complete 0, det = ±1 6, quasi-symmetric 6
+family (3), 0 orders: table complete 0, det = ±1 0, quasi-symmetric 0
+==============================================================================================================
+                                                                       [total time 9.9 s, peak memory 0.75 GB]
+# 2026-11-05 13:48:00  exit code 0

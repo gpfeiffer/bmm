@@ -1,0 +1,60 @@
+# 2026-11-05 13:44:21  julia programs/zbasis_modular.jl G10
+==============================================================================================================
+ H(G10): the z-basis B tested modulo p (bmm.pdf, Section 4)               zbasis_modular.jl, 2026-11-05 13:44 
+==============================================================================================================
+W = G10, |W| = 288; generators s, t of orders 3, 4; s t s t = t s t s
+T_s³ = c2 T_s² + c1 T_s + c0; T_t⁴ = a3 T_t³ + a2 T_t² + a1 T_t + a0
+U = <s>, e = 3, 96 cosets; z = s t s t; π = z¹²
+A = BFS_(s, t) (cosettable10.txt); B = { T_z^j T_s^m T_x : j < 12, m < 3, x in X }, |X| = 8 (basis10.txt)
+p = 15013; c1, c2 = 11, 13; a1, a2, a3 = 17, 19, 23; c0 = a0 = 1
+==== Coset table of A and CBM(A, B) (Lemma 2.6) ==============================================================
+testing the 384 setRow's of cosettable10.txt compile and the relations of H hold ... true
+testing det CBM(A, B) = ±1 ... true (det = 1)
+                                                                                  [time 1.8 s, memory 0.74 GB]
+==== τ_B in the basis A: φ_j(h) = τ_B(T_z^j h), [a] = coefficient of a in A ==================================
+φ_0: 1 coordinate = [1]
+φ_1: 1 coordinate = [T_s² T_(w_59)]
+φ_2: 1 coordinate = [T_s² T_(w_92)]
+φ_3: 1 coordinate = [T_s² T_(w_82)]
+φ_4: 1 coordinate = [T_s² T_(w_96)]
+φ_5: 1 coordinate = [T_s² T_(w_93)]
+φ_6: 1 coordinate = [T_s² T_(w_95)]
+φ_7: 3 coordinates = [T_s² T_(w_86)] + (23)[T_s² T_(w_94)] + (529)[T_s² T_(w_96)]
+φ_8: 5 coordinates = [T_s² T_(w_74)] + (23)[T_s² T_(w_87)] + (529)[T_s² T_(w_93)] + (13)[T_s T_(w_96)] + (169)[T_s² T_(w_96)]
+φ_9: 32 coordinates
+φ_10: 104 coordinates
+φ_11: 240 coordinates
+trace = "0,1,0"
+testing the trace "0,1,0" of the group file gives τ_B ... true
+τ_B(a) = δ_(a,1) on A: yes (τ_B = τ_A)
+                                                                                  [time 0.9 s, memory 0.74 GB]
+==== Proposition 4.17 and Theorem 4.18 at the point (t = can_trace) ==========================================
+testing t(a T_s) = t(T_s a) for all a in A ... true
+testing t(a T_t) = t(T_t a) for all a in A ... true
+testing t(b) = δ_(b,1) for all b in B ... true
+testing F_1 = 0 ... true
+testing F_2 = 0 ... true
+testing F_3 = 0 ... true
+testing F_4 = 0 ... true
+testing F_5 = 0 ... true
+testing F_6 = 0 ... true
+testing F_7 = 0 ... true
+testing F_8 = 0 ... true
+testing F_9 = 0 ... true
+testing F_10 = 0 ... true
+testing F_11 = 0 ... true
+testing det F_0 = ±1 ... true (det = 1; F_0 is 24 x 24)
+testing t(b⁻¹ T_π) = 0 for all b ≠ 1 in B ... true
+testing t(T_π) = 1 ... true
+                                                                                  [time 1.1 s, memory 0.74 GB]
+==== Gram matrices at the point ==============================================================================
+testing Gram_t(B, B) is symmetric ... true
+testing det Gram_t(B, B⁻¹) = ±1 ... true (det = 1)
+testing det Gram_t(B, B) = ±1 ... true (det = 1)
+                                                                                  [time 0.1 s, memory 0.74 GB]
+==== Result (mod 15013) ======================================================================================
+all 23 tests true
+predicted: det Gram(τ_B) = + a0^1728 c0^2496
+==============================================================================================================
+                                                                      [total time 11.1 s, peak memory 0.74 GB]
+# 2026-11-05 13:44:25  exit code 0

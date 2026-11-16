@@ -1,0 +1,20 @@
+# H(G4): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G4"
+order        = 24
+letters      = ["s1", "s2"]               # letter 1 = s1, 2 = s2; letter 3 = z
+orders       = [3, 3]
+classes      = [1, 1]                     # one class of reflections
+params       = [["c0", "c1", "c2"]]       # T^3 = c2 T^2 + c1 T + c0, constant term first (c0 invertible)
+chevie_group = 4
+chevie       = [1, 2]
+braid        = ["1,2,1 = 2,1,2"]
+parabolic    = 1                          # U = <s1>
+zword        = "1,2,1,2,1,2"              # z = (s1 s2)^3, central of order 2
+zstep        = 1
+zlevels      = 2
+pipower      = 2                          # T_pi = T_z^2 = (T_s1 T_s2)^6
+bfs          = "1,2"
+basis        = "basis04.txt"
+table        = "cosettable04.txt"
+trace        = "0,1,0"                    # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h
+bmm_table    = "-c0^96"                   # not in Table 2 of bmm.pdf

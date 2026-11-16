@@ -1,0 +1,20 @@
+# H(G24): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G24"
+order        = 336
+letters      = ["s1", "s2", "s3"]         # letter 1 = s1, 2 = s2, 3 = s3; letter 4 = z
+orders       = [2, 2, 2]
+classes      = [1, 1, 1]                  # one class of reflections
+params       = [["e0", "e1"]]             # T^2 = e1 T + e0, constant term first (e0 invertible)
+chevie_group = 24
+chevie       = [1, 2, 3]
+braid        = ["1,2,1 = 2,1,2", "1,3,1 = 3,1,3", "3,2,3,2 = 2,3,2,3", "2,3,1,2,3,1,2,3,1 = 3,2,3,1,2,3,1,2,3"]
+parabolic    = 1                          # U = <s1>
+zword        = "1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3"   # z = (s1 s2 s3)^7, central of order 2
+zstep        = 1
+zlevels      = 2
+pipower      = 2                          # T_pi = T_z^2
+bfs          = "1,2,3"
+basis        = "basis24.txt"
+table        = "cosettable24.txt"
+trace        = "0,1,0"                    # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h
+bmm_table    = "+e0^5588"

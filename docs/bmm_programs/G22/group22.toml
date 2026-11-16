@@ -1,0 +1,20 @@
+# H(G22): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G22"
+order        = 240
+letters      = ["s0", "s1", "s2"]         # letter 1 = s0, 2 = s1, 3 = s2; letter 4 = z
+orders       = [2, 2, 2]
+classes      = [1, 1, 1]                  # one class of reflections
+params       = [["e0", "e1"]]             # T^2 = e1 T + e0, constant term first (e0 invertible)
+chevie_group = 22
+chevie       = [1, 2, 3]
+braid        = ["1,2,3,1,2 = 2,3,1,2,3", "1,2,3,1,2 = 3,1,2,3,1"]
+parabolic    = 1                          # U = <s0>
+zword        = "1,2,3,1,2,3,1,2,3,1,2,3,1,2,3"   # z = (s0 s1 s2)^5, central of order 4
+zstep        = 1
+zlevels      = 4
+pipower      = 4                          # T_pi = T_z^4
+bfs          = "2,3,1"                    # the order o of BFS_o (for the order 1,2,3 the passes of setRow's do not complete the table)
+basis        = "basis22.txt"
+table        = "cosettable22.txt"
+trace        = "0,1,0"                    # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h
+bmm_table    = "+e0^6288"

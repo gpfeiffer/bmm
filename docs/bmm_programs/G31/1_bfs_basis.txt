@@ -1,0 +1,102 @@
+# 2026-11-12 11:49:07  julia programs/bfs_basis.jl G31/group31.toml
+==============================================================================================================
+ H(G31): the tower of coset tables by the setRow procedure, mod p (bmm.pdf, Sections 3.3 and 5)  bfs_basis.jl, 2026-11-12 11:49 
+==============================================================================================================
+W = G31, |W| = 46080; generators s1, s2, s3, s4, s5 of order 2; s1 s4 s1 = s4 s1 s4; s1 s5 = s5 s1;
+    s2 s4 s2 = s4 s2 s4; s2 s5 s2 = s5 s2 s5; s3 s4 = s4 s3; s3 s5 s3 = s5 s3 s5; s4 s5 = s5 s4;
+    s1 s2 s3 = s2 s3 s1; s1 s2 s3 = s3 s1 s2
+T_s1² = e1 T_s1 + e0 (same for T_s2, T_s3, T_s4, T_s5)
+tower 1 < <s5> < <s3, s5> < <s1, s2, s3, s5> < W (engine tower);
+    z = s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5; π = z⁴
+A = B_P · X, B_P = the basis of H(G(4,2,3)) built level by level, P = G(4,2,3) = <s1, s2, s3, s5>
+    (cosettable31.txt); B = A (X: basis31.txt)
+p = 15013; e1 = 11; e0 = 1
+the coset tables are filled by the setRow procedure (bmm.pdf §3.3), with the columns of z and z^-1
+==== The presentation, in W ==================================================================================
+testing in W: s1, s2, s3, s4, s5 have orders 2, 2, 2, 2, 2 ... true
+testing in W: s1 s4 s1 = s4 s1 s4 ... true
+testing in W: s1 s5 = s5 s1 ... true
+testing in W: s2 s4 s2 = s4 s2 s4 ... true
+testing in W: s2 s5 s2 = s5 s2 s5 ... true
+testing in W: s3 s4 = s4 s3 ... true
+testing in W: s3 s5 s3 = s5 s3 s5 ... true
+testing in W: s4 s5 = s5 s4 ... true
+testing in W: s1 s2 s3 = s2 s3 s1 ... true
+testing in W: s1 s2 s3 = s3 s1 s2 ... true
+testing in W: z = s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 is central ... true (z has order 4 in W)
+                                                                                  [time 0.5 s, memory 1.06 GB]
+==== Coset table of A, level 1: H(A2) over H(<s5>), A2 = <s3, s5> (Proposition 3.8) ==========================
+testing |A2| = 6 ... true
+testing the table of H(A2) over H(<s5>) closes by setRow sweeps (§3.3) from the relations of W among s3, s5 ... true (3 cosets; 1 sweeps, 2 tree edges, 6 setRow's)
+rows: 6; cosets per row: mean 1.33, max 2; entries: 8; terms per entry: mean 1.0, max 1
+coset words x_n: 1, s3, s3 s5
+                                                                                  [time 0.9 s, memory 1.06 GB]
+==== Relations of H on the table, level 1 ====================================================================
+testing the tree rows x_n T_s = x_m (x_m = x_n s) and x T_s = T_s x (s in P, x = 1) are in the table ... true
+testing T_s3² = e1 T_s3 + 1 on all cosets ... true
+testing T_s5² = e1 T_s5 + 1 on all cosets ... true
+testing s3 s5 s3 = s5 s3 s5 on all cosets ... true
+testing the flat algebra H(A2) of rank 6 satisfies its relations ... true
+                                                                                  [time 0.1 s, memory 1.06 GB]
+==== Coset table of A, level 2: H(G(4,2,3)) over H(A2), G(4,2,3) = <s1, s2, s3, s5> (Proposition 3.8) ========
+testing |G(4,2,3)| = 192 ... true
+testing the table of H(G(4,2,3)) over H(A2) closes by setRow sweeps (§3.3) from the relations of W among s1, s2, s3, s5 ... true (32 cosets; 5 sweeps, 31 tree edges, 190 setRow's)
+rows: 128; cosets per row: mean 2.45, max 11; entries: 313; terms per entry: mean 1.2, max 4
+                                                                                  [time 0.0 s, memory 1.06 GB]
+==== Relations of H on the table, level 2 ====================================================================
+testing the tree rows x_n T_s = x_m (x_m = x_n s) and x T_s = T_s x (s in P, x = 1) are in the table ... true
+testing T_s1² = e1 T_s1 + 1 on all cosets ... true
+testing T_s2² = e1 T_s2 + 1 on all cosets ... true
+testing T_s3² = e1 T_s3 + 1 on all cosets ... true
+testing T_s5² = e1 T_s5 + 1 on all cosets ... true
+testing s1 s5 = s5 s1 on all cosets ... true
+testing s2 s5 s2 = s5 s2 s5 on all cosets ... true
+testing s3 s5 s3 = s5 s3 s5 on all cosets ... true
+testing s1 s2 s3 = s2 s3 s1 on all cosets ... true
+testing s1 s2 s3 = s3 s1 s2 on all cosets ... true
+testing the flat algebra H(G(4,2,3)) of rank 192 satisfies its relations ... true
+                                                                                  [time 0.5 s, memory 1.22 GB]
+==== Coset table of A by the setRow procedure (bmm.pdf §3.3) mod p (Proposition 3.8) =========================
+X = T_o(P\W), o = (s2, s3, s4, s5, s1), P = G(4,2,3) = <s1, s2, s3, s5>: 240 words, closed under prefixes, one
+    per coset; longest 15
+columns: the generators, z and their inverses (12); identities σ = w: 198
+  sweep 1: 672 setRow's (gen 239, inv 318, rel 115), 1722 rows open  [21.6 s, 1.22 GB]
+  sweep 2: 157 setRow's (gen 36, inv 43, rel 78), 1565 rows open  [21.6 s, 1.22 GB]
+  sweep 3: 221 setRow's (gen 35, inv 69, rel 117), 1344 rows open  [21.6 s, 1.22 GB]
+  sweep 4: 292 setRow's (gen 48, inv 90, rel 154), 1052 rows open  [21.7 s, 1.22 GB]
+  sweep 5: 184 setRow's (gen 64, inv 44, rel 76), 868 rows open  [21.9 s, 1.22 GB]
+  sweep 6: 303 setRow's (gen 32, inv 38, rel 233), 565 rows open  [22.7 s, 1.22 GB]
+  sweep 7: 303 setRow's (gen 18, inv 25, rel 260), 262 rows open  [31.6 s, 1.27 GB]
+  sweep 8: 183 setRow's (gen 25, inv 26, rel 132), 79 rows open  [1 min 05 s, 1.33 GB]
+  sweep 9: 75 setRow's (gen 34, inv 8, rel 33), 4 rows open  [1 min 13 s, 1.33 GB]
+  sweep 10: 4 setRow's (gen 4, inv 0, rel 0), 0 rows open  [1 min 13 s, 1.33 GB]
+testing the table closes by setRow sweeps from the relations of W ... true (10 sweeps, 239 tree edges, 2394 setRow's)
+rows: 2880; cosets per row: mean 17.86, max 167; entries: 51427; terms per entry: mean 36.2, max 192
+the setRow program written to cosettable31.txt (10 sweeps, 239 tree edges, 2394 setRow's)
+240 words written to basis31.txt
+240 words of Y_1 written to pairing31.txt (140 with z)
+                                                                                 [time 52.7 s, memory 1.38 GB]
+==== Relations of H on the table =============================================================================
+testing the tree rows x_n T_s = x_m (x_m = x_n s) and x T_s = T_s x (s in P, x = 1, z, z^2, ...) are in the table ... true
+testing T_s1² = e1 T_s1 + 1 on all cosets ... true
+testing T_s2² = e1 T_s2 + 1 on all cosets ... true
+testing T_s3² = e1 T_s3 + 1 on all cosets ... true
+testing T_s4² = e1 T_s4 + 1 on all cosets ... true
+testing T_s5² = e1 T_s5 + 1 on all cosets ... true
+testing s1 s4 s1 = s4 s1 s4 on all cosets ... true
+testing s1 s5 = s5 s1 on all cosets ... true
+testing s2 s4 s2 = s4 s2 s4 on all cosets ... true
+testing s2 s5 s2 = s5 s2 s5 on all cosets ... true
+testing s3 s4 = s4 s3 on all cosets ... true
+testing s3 s5 s3 = s5 s3 s5 on all cosets ... true
+testing s4 s5 = s5 s4 on all cosets ... true
+testing s1 s2 s3 = s2 s3 s1 on all cosets ... true
+testing s1 s2 s3 = s3 s1 s2 on all cosets ... true
+testing the matrix of the letter 6 is that of its word s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 s1 s4 s2 s3 s5 on all cosets ... true
+testing s4 s1 s2 s4 s1 s2 = s1 s2 s4 s1 s2 s4 on all cosets (a consequence, not used by the setRow procedure) ... true
+                                                                                 [time 15.6 s, memory 1.40 GB]
+==== Result (mod 15013) ======================================================================================
+all 49 tests true; written cosettable31.txt (replayed exactly by bmm_proof.jl) and basis31.txt, pairing31.txt
+==============================================================================================================
+                                                                  [total time 1 min 29 s, peak memory 1.40 GB]
+# 2026-11-12 11:50:20  exit code 0

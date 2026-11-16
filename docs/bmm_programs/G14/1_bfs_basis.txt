@@ -1,0 +1,40 @@
+# 2026-11-05 13:42:15  julia programs/bfs_basis.jl G14
+==============================================================================================================
+ H(G14): the BFS basis A = BFS_o and its coset table, mod p (bmm.pdf, Section 3)  bfs_basis.jl, 2026-11-05 13:42 
+==============================================================================================================
+W = G14, |W| = 144; generators s, t of orders 2, 3; s t s t s t s t = t s t s t s t s
+T_s² = e1 T_s + e0; T_t³ = c2 T_t² + c1 T_t + c0
+U = <t>, e = 3, 48 cosets; z = s t s t s t s t; π = z⁶
+o = (s, t)
+==== Tree BFS_o (Section 3.2), in W ==========================================================================
+testing in W: s, t have orders 2, 3 ... true
+testing in W: s t s t s t s t = t s t s t s t s ... true
+testing in W: z = s t s t s t s t is central ... true (z has order 6 in W)
+nodes per level: 1, 1, 1, 2, 2, 3, 4, 5, 6, 6, 6, 5, 3, 2, 1
+testing the tree reaches all 48 cosets of U ... true
+                                                                                  [time 1.8 s, memory 0.70 GB]
+==== Coset table CT_A by sweeps of setRow's (Section 3.3) ====================================================
+p = 15013; e1 = -6487; c1, c2 = -476, -4773; e0 = c0 = 1
+sweep 1: 82 setRow's (gen 33, inv 34, rel 15), 110 rows open
+sweep 2: 53 setRow's (gen 0, inv 1, rel 52), 57 rows open
+sweep 3: 42 setRow's (gen 2, inv 2, rel 38), 15 rows open
+sweep 4: 12 setRow's (gen 5, inv 0, rel 7), 3 rows open
+sweep 5: 3 setRow's (gen 2, inv 0, rel 1), 0 rows open
+testing the table is complete ... true (47 tree edges, 192 setRow's, 5 sweeps)
+                                                                                  [time 1.2 s, memory 0.73 GB]
+==== Relations of H on the table =============================================================================
+testing T_s² = e1 T_s + 1 ... true
+testing T_t³ = c2 T_t² + c1 T_t + 1 ... true
+testing T_s T_s⁻¹ = 1 ... true
+testing T_t T_t⁻¹ = 1 ... true
+testing T_z T_z⁻¹ = 1 ... true
+testing T_s T_t T_s T_t T_s T_t T_s T_t = T_t T_s T_t T_s T_t T_s T_t T_s ... true
+testing T_z = T_s T_t T_s T_t T_s T_t T_s T_t ... true
+testing T_z T_s = T_s T_z ... true
+testing T_z T_t = T_t T_z ... true
+                                                                                  [time 0.7 s, memory 0.73 GB]
+==== Result (mod 15013) ======================================================================================
+all 14 tests true; written cosettable14.txt (executed exactly by bmm_proof.jl)
+==============================================================================================================
+                                                                       [total time 9.8 s, peak memory 0.73 GB]
+# 2026-11-05 13:42:18  exit code 0

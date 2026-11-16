@@ -1,0 +1,85 @@
+# 2026-11-05 13:46:19  julia programs/zbasis_modular.jl G11
+==============================================================================================================
+ H(G11): the z-basis B tested modulo p (bmm.pdf, Section 4)               zbasis_modular.jl, 2026-11-05 13:46 
+==============================================================================================================
+W = G11, |W| = 576; generators s, t, u of orders 2, 3, 4; s t u = t u s; s t u = u s t
+T_s² = e1 T_s + e0; T_t³ = c2 T_t² + c1 T_t + c0; T_u⁴ = a3 T_u³ + a2 T_u² + a1 T_u + a0
+U = <u>, e = 4, 144 cosets; z = s t u; π = z²⁴
+A = BFS_(s, z, u) (cosettable11.txt); B = { T_z^j T_u^m T_x : j < 24, m < 4, x in X }, |X| = 6 (basis11.txt)
+p = 15013; e1 = 11; c1, c2 = 13, 17; a1, a2, a3 = 19, 23, 29; e0 = c0 = a0 = 1
+==== Coset table of A and CBM(A, B) (Lemma 2.6) ==============================================================
+testing the 864 setRow's of cosettable11.txt compile and the relations of H hold ... true
+testing det CBM(A, B) = ±1 ... true (det = -1)
+                                                                                  [time 1.7 s, memory 0.75 GB]
+==== τ_B in the basis A: φ_j(h) = τ_B(T_z^j h), [a] = coefficient of a in A ==================================
+φ_0: 1 coordinate = [1]
+φ_1: 1 coordinate = [T_u³ T_(w_122)]
+φ_2: 1 coordinate = [T_u³ T_(w_107)]
+φ_3: 1 coordinate = [T_u³ T_(w_91)]
+φ_4: 1 coordinate = [T_u³ T_(w_141)]
+φ_5: 1 coordinate = [T_u³ T_(w_137)]
+φ_6: 1 coordinate = [T_u³ T_(w_127)]
+φ_7: 2 coordinates = [T_u² T_(w_144)] + (29)[T_u³ T_(w_144)]
+φ_8: 2 coordinates = [T_u² T_(w_143)] + (29)[T_u³ T_(w_143)]
+φ_9: 2 coordinates = [T_u² T_(w_140)] + (29)[T_u³ T_(w_140)]
+φ_10: 4 coordinates = [T_u² T_(w_133)] + (29)[T_u³ T_(w_133)] + (29)[T_u² T_(w_141)] + (841)[T_u³ T_(w_141)]
+φ_11: 4 coordinates = [T_u² T_(w_123)] + (29)[T_u³ T_(w_123)] + (29)[T_u² T_(w_137)] + (841)[T_u³ T_(w_137)]
+φ_12: 4 coordinates = [T_u² T_(w_108)] + (29)[T_u³ T_(w_108)] + (29)[T_u² T_(w_127)] + (841)[T_u³ T_(w_127)]
+φ_13: 11 coordinates
+φ_14: 19 coordinates
+φ_15: 30 coordinates
+φ_16: 71 coordinates
+φ_17: 90 coordinates
+φ_18: 118 coordinates
+φ_19: 196 coordinates
+φ_20: 257 coordinates
+φ_21: 306 coordinates
+φ_22: 368 coordinates
+φ_23: 472 coordinates
+trace = "0,1,0"
+testing the trace "0,1,0" of the group file gives τ_B ... true
+τ_B(a) = δ_(a,1) on A: yes (τ_B = τ_A)
+                                                                                  [time 0.9 s, memory 0.75 GB]
+==== Proposition 4.17 and Theorem 4.18 at the point (t = can_trace) ==========================================
+testing t(a T_s) = t(T_s a) for all a in A ... true
+testing t(a T_t) = t(T_t a) for all a in A ... true
+testing t(a T_u) = t(T_u a) for all a in A ... true
+testing t(b) = δ_(b,1) for all b in B ... true
+testing F_1 = 0 ... true
+testing F_2 = 0 ... true
+testing F_3 = 0 ... true
+testing F_4 = 0 ... true
+testing F_5 = 0 ... true
+testing F_6 = 0 ... true
+testing F_7 = 0 ... true
+testing F_8 = 0 ... true
+testing F_9 = 0 ... true
+testing F_10 = 0 ... true
+testing F_11 = 0 ... true
+testing F_12 = 0 ... true
+testing F_13 = 0 ... true
+testing F_14 = 0 ... true
+testing F_15 = 0 ... true
+testing F_16 = 0 ... true
+testing F_17 = 0 ... true
+testing F_18 = 0 ... true
+testing F_19 = 0 ... true
+testing F_20 = 0 ... true
+testing F_21 = 0 ... true
+testing F_22 = 0 ... true
+testing F_23 = 0 ... true
+testing det F_0 = ±1 ... true (det = 1; F_0 is 24 x 24)
+testing t(b⁻¹ T_π) = 0 for all b ≠ 1 in B ... true
+testing t(T_π) = 1 ... true
+                                                                                  [time 1.1 s, memory 0.75 GB]
+==== Gram matrices at the point ==============================================================================
+testing Gram_t(B, B) is symmetric ... true
+testing det Gram_t(B, B⁻¹) = ±1 ... true (det = 1)
+testing det Gram_t(B, B) = ±1 ... true (det = 1)
+                                                                                  [time 0.3 s, memory 0.76 GB]
+==== Result (mod 15013) ======================================================================================
+all 36 tests true
+predicted: det Gram(τ_B) = + a0^3936 c0^4416 e0^7296
+==============================================================================================================
+                                                                      [total time 11.1 s, peak memory 0.76 GB]
+# 2026-11-05 13:46:23  exit code 0

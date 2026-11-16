@@ -1,0 +1,20 @@
+# H(G18): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G18"
+order        = 1800
+letters      = ["t", "u"]                 # letter 1 = t, 2 = u; letter 3 = z
+orders       = [3, 5]
+classes      = [1, 2]                     # two classes of reflections: {t}, {u}
+params       = [["c0", "c1", "c2"], ["d0", "d1", "d2", "d3", "d4"]]   # T_t^3 = c2 T^2 + c1 T + c0, T_u^5 = d4 T^4 + ... + d1 T + d0
+chevie_group = 18
+chevie       = [1, 2]
+braid        = ["1,2,1,2 = 2,1,2,1"]
+parabolic    = 2                          # U = <u>
+zword        = "1,2,1,2"                  # z = t u t u, central of order 30 in W
+zstep        = 6                          # B is a z^6-basis (z^6 has order 5 = o(u) in W)
+zlevels      = 5
+pipower      = 30                         # T_pi = T_z^30
+bfs          = "1,2"
+basis        = "basis18.txt"
+table        = "cosettable18.txt"
+trace        = "1,337,4"                  # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h
+bmm_table    = "-c0^31700 d0^22230"

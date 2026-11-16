@@ -1,0 +1,19 @@
+# H(G11): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G11"
+order        = 576
+letters      = ["s", "t", "u"]     # letter 1 = s, 2 = t, 3 = u; letter 4 = z
+orders       = [2, 3, 4]
+classes      = [1, 2, 3]                     # 3 classes of reflections: {s}, {t}, {u}
+params       = [["e0", "e1"], ["c0", "c1", "c2"], ["a0", "a1", "a2", "a3"]]   # T^k = r_(k-1) T^(k-1) + ... + r_0 for each class, constant term first (invertible)
+chevie_group = 11
+chevie       = [1, 2, 3]
+braid        = ["1,2,3 = 2,3,1", "1,2,3 = 3,1,2"]   # s t u = t u s, s t u = u s t
+parabolic    = 3                          # U = <u>
+zword        = "1,2,3"                     # z = s t u, central of order 24 (s t u = t u s = u s t)
+zstep        = 1
+zlevels      = 24
+pipower      = 24                          # T_pi = T_z^24
+bfs          = "1,4,3"                    # the order o = (s, z, u) of BFS_o; BFS_o is quasi-symmetric
+basis        = "basis11.txt"
+table        = "cosettable11.txt"
+trace        = "0,1,0"                    # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h

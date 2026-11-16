@@ -1,0 +1,77 @@
+# H(G34) over H(G33) over H(A4) as a TOWER (engine tower): the basis B = B33 · T_X of Marin–Pfeiffer
+# (bmm.pdf §5.2: X34 the 756 coset words in breadth-first order s1, ..., s6, over P = G33 = <s1, ..., s5>), with H(A4) and
+# H(G33) built level by level as flat algebras, 1 < <s1> < A2 < A3 < A4 < G33 < W, and every table filled by the setRow
+# procedure of bmm.pdf §3.3 (lib/tower/setrow.jl); setrow_z = false omits the columns of z (z = (s1 ... s6)^7 has 42
+# letters; the table closes without them).
+name         = "G34"
+order        = 39191040
+engine       = "tower"
+setrow_z     = false
+letters      = ["s1", "s2", "s3", "s4", "s5", "s6"]   # letter 7 = z
+orders       = [2, 2, 2, 2, 2, 2]
+classes      = [1, 1, 1, 1, 1, 1]
+params       = [["e0", "e1"]]             # T^2 = e1 T + e0; computed over R' = Z[e1], e0 = 1
+chevie_group = 34
+braid        = ["1,2,1 = 2,1,2", "1,3 = 3,1", "1,4 = 4,1", "1,5 = 5,1", "2,3,2 = 3,2,3", "2,4,2 = 4,2,4", "2,5 = 5,2",
+                "3,4,3 = 4,3,4", "3,5 = 5,3", "4,5,4 = 5,4,5", "4,2,3,4,2,3 = 3,4,2,3,4,2", "3,4,2,3,4,2 = 2,3,4,2,3,4",
+                "5,6,5 = 6,5,6", "1,6 = 6,1", "2,6 = 6,2", "3,6 = 6,3", "4,6 = 6,4"]
+                                          # Marin–Pfeiffer's 17 relations
+proof_skip_top_relations = ["4,2,3,4,2,3 = 3,4,2,3,4,2", "3,4,2,3,4,2 = 2,3,4,2,3,4"]
+                                          # the step proof does not test these two on the 756 cosets of the top: they are a
+                                          # check of the implementation, not a step of the proof (B is a basis because the
+                                          # table closes, bmm.pdf §3), and too large exactly (the first alone ran 10 h at
+                                          # 12 GB without ending).  They hold modulo p in 1_bfs_basis.txt and are tested
+                                          # exactly at the level G33.
+zword        = "1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6"
+                                          # z = (s1 s2 s3 s4 s5 s6)^7, central of order 6
+zstep        = 6
+zlevels      = 1
+pipower      = 6                          # T_pi = T_z^6
+bfs          = "1,2,3,4,5,6"              # o: X = T_o(P\W) = Marin–Pfeiffer's 756 coset words
+basis        = "basis34.txt"
+table        = "cosettable34.txt"
+trace        = "0,1,0"
+pairing      = "rev"                      # M(X, rev X) over H(G33): blocks of sizes 18 and 3 (bmm.pdf §5.2)
+zeta         = "7,7,7"                    # condition (3) through zeta = z^3 (zeta^2 = pi)
+threads      = 1
+memory       = "14G"                     # MemoryMax of run.sh: the proof peaks at 13 GB (the Gram matrix of H(G33), exact),
+                                          # the steps bfs and traces at 8.2 and 8.5 GB; a machine with 16 GB of memory
+heap         = "11G"                     # --heap-size-hint of julia (run.sh): below the ~6.4 GB of live data of the proof,
+                                          # Julia's garbage collector runs after almost every allocation
+steps        = ["bfs", "proof", "traces"]  # the step modular is not run for G34 (no record 2): the exact proof decides
+
+[[level]]
+name  = "<s1>"
+gens  = "1"
+order = 2
+[[level]]
+name  = "A2"
+gens  = "1,2"
+over  = "1"
+order = 6
+bfs   = "1,2"
+pi    = "1,2,1,2,1,2"
+[[level]]
+name  = "A3"
+gens  = "1,2,4"
+over  = "1,2"
+order = 24
+bfs   = "1,2,4"
+pi    = "1,2,4,1,2,4,1,2,4,1,2,4"         # pi = (s1 s2 s4)^4, the full twist of A3 (s2 s4 s2 = s4 s2 s4)
+[[level]]
+name  = "A4"
+gens  = "1,2,4,5"
+over  = "1,2,4"
+order = 120
+bfs   = "1,2,4,5"
+pi    = "1,2,4,5,1,2,4,5,1,2,4,5,1,2,4,5,1,2,4,5"
+[[level]]                                 # H(G33) = ⊕ H(A4) x_n, 432 cosets (the top level of G33/group33.toml)
+name  = "G33"
+gens  = "1,2,3,4,5"
+over  = "1,2,4,5"
+order = 51840
+bfs   = "1,2,3,4,5"
+pairing = "rev"                           # M(X, rev X) over H(A4): 426 singletons and one block of size 6, eliminated with
+                                          # unit pivots, as at the top of G33/group33.toml
+pi    = "1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5"
+                                          # pi = (s1 ... s5)^18, the pi of G33

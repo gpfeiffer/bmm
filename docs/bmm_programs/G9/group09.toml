@@ -1,0 +1,19 @@
+# H(G9): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G9"
+order        = 192
+letters      = ["s", "t"]        # letter 1 = s, 2 = t; letter 3 = z
+orders       = [2, 4]
+classes      = [1, 2]                     # 2 classes of reflections: {s}, {t}
+params       = [["e0", "e1"], ["a0", "a1", "a2", "a3"]]   # T^k = r_(k-1) T^(k-1) + ... + r_0 for each class, constant term first (invertible)
+chevie_group = 9
+chevie       = [1, 2]
+braid        = ["1,2,1,2,1,2 = 2,1,2,1,2,1"]   # s t s t s t = t s t s t s
+parabolic    = 2                          # U = <t>
+zword        = "1,2,1,2,1,2"               # z = (s t)^3 (Δ of the braid relation (s t)^3 = (t s)^3), central of order 8
+zstep        = 1
+zlevels      = 8
+pipower      = 8                          # T_pi = T_z^8
+bfs          = "1,2"
+basis        = "basis09.txt"
+table        = "cosettable09.txt"
+trace        = "0,1,0"                        # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h

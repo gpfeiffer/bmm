@@ -1,0 +1,23 @@
+# The set X of the z-basis B = {a^m z^κ x : 0 <= m < 3, 0 <= κ < 6, x in X} of H(G20), z = (a b)^5;
+# letters 1 = a, 2 = b.  X is the restriction of the G21 basis.
+# One word per line, in breadth-first order of the tree of X; e is the empty word; a negative letter is an inverse.
+e
+2
+2,1
+2,2
+2,-1
+2,1,2
+2,1,-2
+2,1,2,1
+2,1,-2,1
+2,1,-2,-1
+2,1,2,1,1
+2,1,-2,-1,2
+2,1,2,1,1,2
+2,1,2,1,1,-2
+2,1,2,1,1,2,-1
+2,1,2,1,1,-2,1
+2,1,2,1,1,-2,-1
+2,1,2,1,1,2,-1,-2
+2,1,2,1,1,2,-1,-2,1
+2,1,2,1,1,2,-1,-2,-1

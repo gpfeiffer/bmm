@@ -1,0 +1,56 @@
+# 2026-11-05 13:39:35  julia programs/bmm_proof.jl G13
+==============================================================================================================
+ H(G13): exact proof of Proposition 4.17 and Theorem 4.18 of bmm.pdf           bmm_proof.jl, 2026-11-05 13:39 
+==============================================================================================================
+W = G13, |W| = 96; generators s, t, u of order 2; u s t u = t u s t; s t u s t = u s t u s
+T_s² = e1 T_s + e0; T_t² = f1 T_t + f0 (same for T_u)
+U = <s>, e = 2, 48 cosets; z = s t u s t u s t u; π = z⁴
+A = BFS_(t, u, s) (cosettable13.txt); B = { T_z^j T_s^m T_x : j < 4, m < 2, x in X }, |X| = 12 (basis13.txt)
+computed over R' = Z[e1, f1], e0 = f0 = 1
+==== Coset table of A (Section 3.3, Proposition 3.8) =========================================================
+testing all 288 setRow's compile ... true (384 rows, 2307 nonzero entries)
+                                                                                  [time 1.1 s, memory 0.77 GB]
+==== Relations of H on the table =============================================================================
+testing T_s² = e1 T_s + 1 ... true
+testing T_t² = f1 T_t + 1 ... true
+testing T_u² = f1 T_u + 1 ... true
+testing T_s T_s⁻¹ = 1 ... true
+testing T_t T_t⁻¹ = 1 ... true
+testing T_u T_u⁻¹ = 1 ... true
+testing T_z T_z⁻¹ = 1 ... true
+testing T_u T_s T_t T_u = T_t T_u T_s T_t ... true
+testing T_s T_t T_u T_s T_t = T_u T_s T_t T_u T_s ... true
+testing T_z = T_s T_t T_u T_s T_t T_u T_s T_t T_u ... true
+testing T_z T_s = T_s T_z ... true
+testing T_z T_t = T_t T_z ... true
+testing T_z T_u = T_u T_z ... true
+                                                                                  [time 0.7 s, memory 0.79 GB]
+==== Linear form t (can_trace): symmetry (Proposition 4.11) and values on B ==================================
+t(h) = [1] h = τ_A(h), [a] = coefficient of a in A
+testing t(a T_s) = t(T_s a) for all a in A ... true
+testing t(a T_t) = t(T_t a) for all a in A ... true
+testing t(a T_u) = t(T_u a) for all a in A ... true
+testing t(b) = δ_(b,1) for all b in B ... true
+                                                                                  [time 1.3 s, memory 0.82 GB]
+==== Gram_t(B, B⁻¹): blocks F_r = ( t(T_z^r b b'⁻¹) ), b, b' in UX, r > 0 (Lemma 4.16) =======================
+testing F_1 = 0 ... true
+testing F_2 = 0 ... true
+testing F_3 = 0 ... true
+                                                                                  [time 0.4 s, memory 0.82 GB]
+==== Block F_0 ===============================================================================================
+F_0: 24 x 24, 171 nonzero entries, 192 terms, largest coefficient 1 (written to 3_F0.txt)
+                                                                                  [time 0.1 s, memory 0.82 GB]
+==== det F_0 (Lemma 4.13) ====================================================================================
+testing det F_0 = ±1 ... true (det F_0 = 1; diagonal blocks 1 (x 24))
+                                                                                  [time 1.1 s, memory 0.82 GB]
+==== Condition (3) of the conjecture =========================================================================
+testing t(b⁻¹ T_π) = 0 for all b ≠ 1 in B ... true
+testing t(T_π) = 1 ... true
+                                                                                  [time 2.1 s, memory 0.82 GB]
+==== Result ==================================================================================================
+all 24 tests true; B is an R-basis and τ_B = t satisfies the BMM conjecture (Proposition 4.17, Theorem 4.18)
+degree 2 Σ w(b) = (1056, 2048), exponents 1056/2, 2048/2; sign (−1)^((96 − 20)/2)
+det Gram(τ_B) = + e0^528 f0^1024
+==============================================================================================================
+                                                                      [total time 12.8 s, peak memory 0.82 GB]
+# 2026-11-05 13:39:42  exit code 0

@@ -1,0 +1,76 @@
+# 2026-11-05 14:27:10  julia programs/bfs_orders.jl G19
+==============================================================================================================
+ H(G19): the tree candidates BFS_o, o in the families of Figure 2, mod p (bmm.pdf, Section 3.3)  bfs_orders.jl, 2026-11-05 14:27 
+==============================================================================================================
+W = G19, |W| = 3600; generators s, t, u of orders 2, 3, 5; s t u = t u s; s t u = u s t
+T_s² = e1 T_s + e0; T_t³ = c2 T_t² + c1 T_t + c0; T_u⁵ = d4 T_u⁴ + d3 T_u³ + d2 T_u² + d1 T_u + d0
+U = <u>, e = 5, 720 cosets; z = s t u; π = z⁶⁰
+p = 15013; e1 = 11; c1, c2 = 13, 17; d1, d2, d3, d4 = 19, 23, 29, 31; e0 = c0 = d0 = 1; A = BFS_(z, s, t, u); τ = can_trace
+table: do the sweeps of setRow's complete the coset table of BFS_o;  det: det CBM(A, BFS_o) (not computed: |W| > 2500);  quasi-symmetric: τ(a) = δ_(a,1) on BFS_o (else: number of nonzero values)
+==== W and the trace =========================================================================================
+testing in W: s, t, u have orders 2, 3, 5 ... true
+testing in W: s t u = t u s ... true
+testing in W: s t u = u s t ... true
+testing in W: z = s t u is central ... true (z has order 60 in W)
+                                                                                  [time 4.0 s, memory 0.76 GB]
+==== Family (1): orders of S (6 orders) ======================================================================
+o = (s, t, u)          table complete (15 sweeps)   quasi-symmetric no (150)
+o = (s, u, t)          table complete (17 sweeps)   quasi-symmetric no (215)
+o = (t, s, u)          table complete (16 sweeps)   quasi-symmetric no (221)
+o = (t, u, s)          table complete (16 sweeps)   quasi-symmetric no (216)
+o = (u, s, t)          table complete (17 sweeps)   quasi-symmetric no (216)
+o = (u, t, s)          table complete (17 sweeps)   quasi-symmetric no (238)
+                                                                                  [time 7.2 s, memory 0.89 GB]
+==== Family (2): orders of S ∪ {z} (24 orders) ===============================================================
+o = (s, t, u, z)       table complete (14 sweeps)   quasi-symmetric no (149)
+o = (s, t, z, u)       table complete (13 sweeps)   quasi-symmetric no (149)
+o = (s, u, t, z)       table complete (14 sweeps)   quasi-symmetric no (206)
+o = (s, u, z, t)       table complete (14 sweeps)   quasi-symmetric no (203)
+o = (s, z, t, u)       table complete (13 sweeps)   quasi-symmetric no (149)
+o = (s, z, u, t)       table complete (14 sweeps)   quasi-symmetric no (195)
+o = (t, s, u, z)       table complete (14 sweeps)   quasi-symmetric no (221)
+o = (t, s, z, u)       table complete (14 sweeps)   quasi-symmetric no (221)
+o = (t, u, s, z)       table complete (14 sweeps)   quasi-symmetric no (216)
+o = (t, u, z, s)       table complete (14 sweeps)   quasi-symmetric no (216)
+o = (t, z, s, u)       table complete (14 sweeps)   quasi-symmetric no (221)
+o = (t, z, u, s)       table complete (14 sweeps)   quasi-symmetric no (216)
+o = (u, s, t, z)       table complete (14 sweeps)   quasi-symmetric no (207)
+o = (u, s, z, t)       table complete (14 sweeps)   quasi-symmetric no (204)
+o = (u, t, s, z)       table complete (15 sweeps)   quasi-symmetric no (238)
+o = (u, t, z, s)       table complete (15 sweeps)   quasi-symmetric no (238)
+o = (u, z, s, t)       table complete (14 sweeps)   quasi-symmetric no (196)
+o = (u, z, t, s)       table complete (15 sweeps)   quasi-symmetric no (226)
+o = (z, s, t, u)       table complete (14 sweeps)   quasi-symmetric no (149)
+o = (z, s, u, t)       table complete (14 sweeps)   quasi-symmetric no (195)
+o = (z, t, s, u)       table complete (14 sweeps)   quasi-symmetric no (162)
+o = (z, t, u, s)       table complete (14 sweeps)   quasi-symmetric no (162)
+o = (z, u, s, t)       table complete (14 sweeps)   quasi-symmetric no (196)
+o = (z, u, t, s)       table complete (15 sweeps)   quasi-symmetric no (226)
+                                                                                 [time 19.6 s, memory 0.94 GB]
+==== Family (3): orders of S ∪ {z} without one generator (18 orders) =========================================
+o = (t, u, z)          table complete (15 sweeps)   quasi-symmetric no (55)
+o = (t, z, u)          table complete (15 sweeps)   quasi-symmetric no (55)
+o = (u, t, z)          table complete (17 sweeps)   quasi-symmetric no (57)
+o = (u, z, t)          table complete (16 sweeps)   quasi-symmetric no (57)
+o = (z, t, u)          table complete (15 sweeps)   quasi-symmetric no (55)
+o = (z, u, t)          table complete (16 sweeps)   quasi-symmetric no (57)
+o = (s, u, z)          table open (240 rows)        quasi-symmetric no (136)
+o = (s, z, u)          table complete (13 sweeps)   quasi-symmetric no (70)
+o = (u, s, z)          table open (738 rows)        quasi-symmetric no (162)
+o = (u, z, s)          table complete (11 sweeps)   quasi-symmetric no (109)
+o = (z, s, u)          table complete (13 sweeps)   quasi-symmetric no (70)
+o = (z, u, s)          table complete (11 sweeps)   quasi-symmetric no (109)
+o = (s, t, z)          table open (578 rows)        quasi-symmetric no (196)
+o = (s, z, t)          table open (567 rows)        quasi-symmetric no (196)
+o = (t, s, z)          table open (589 rows)        quasi-symmetric no (232)
+o = (t, z, s)          table open (589 rows)        quasi-symmetric no (232)
+o = (z, s, t)          table open (567 rows)        quasi-symmetric no (196)
+o = (z, t, s)          table complete (19 sweeps)   quasi-symmetric no (232)
+                                                                                 [time 12.5 s, memory 0.94 GB]
+==== Result (mod 15013) ======================================================================================
+family (1), 6 orders: table complete 6, quasi-symmetric 0
+family (2), 24 orders: table complete 24, quasi-symmetric 0
+family (3), 18 orders: table complete 11, quasi-symmetric 0
+==============================================================================================================
+                                                                      [total time 48.8 s, peak memory 0.94 GB]
+# 2026-11-05 14:27:53  exit code 0

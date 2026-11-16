@@ -1,0 +1,76 @@
+# 2026-11-05 13:42:03  julia programs/bfs_orders.jl G7
+==============================================================================================================
+ H(G7): the tree candidates BFS_o, o in the families of Figure 2, mod p (bmm.pdf, Section 3.3)  bfs_orders.jl, 2026-11-05 13:42 
+==============================================================================================================
+W = G7, |W| = 144; generators s, t, u of orders 2, 3, 3; s t u = t u s; s t u = u s t
+T_s² = e1 T_s + e0; T_t³ = c2 T_t² + c1 T_t + c0; T_u³ = b2 T_u² + b1 T_u + b0
+U = <t>, e = 3, 48 cosets; z = s t u; π = z¹²
+p = 15013; e1 = 11; c1, c2 = 13, 17; b1, b2 = 19, 23; e0 = c0 = b0 = 1; A = BFS_(s, t, z); τ = can_trace
+table: do the sweeps of setRow's complete the coset table of BFS_o;  det: det CBM(A, BFS_o);  quasi-symmetric: τ(a) = δ_(a,1) on BFS_o (else: number of nonzero values)
+==== W and the trace =========================================================================================
+testing in W: s, t, u have orders 2, 3, 3 ... true
+testing in W: s t u = t u s ... true
+testing in W: s t u = u s t ... true
+testing in W: z = s t u is central ... true (z has order 12 in W)
+                                                                                  [time 2.7 s, memory 0.76 GB]
+==== Family (1): orders of S (6 orders) ======================================================================
+o = (s, t, u)          table complete (6 sweeps)    det      1  quasi-symmetric no (1)
+o = (s, u, t)          table complete (6 sweeps)    det     -1  quasi-symmetric no (4)
+o = (t, s, u)          table complete (6 sweeps)    det     -1  quasi-symmetric no (1)
+o = (t, u, s)          table complete (6 sweeps)    det     -1  quasi-symmetric no (1)
+o = (u, s, t)          table complete (5 sweeps)    det     -1  quasi-symmetric no (1)
+o = (u, t, s)          table complete (6 sweeps)    det      1  quasi-symmetric no (1)
+                                                                                  [time 1.6 s, memory 0.76 GB]
+==== Family (2): orders of S ∪ {z} (24 orders) ===============================================================
+o = (s, t, u, z)       table complete (6 sweeps)    det      1  quasi-symmetric no (1)
+o = (s, t, z, u)       table complete (5 sweeps)    det      1  quasi-symmetric no (1)
+o = (s, u, t, z)       table complete (6 sweeps)    det      1  quasi-symmetric no (4)
+o = (s, u, z, t)       table complete (6 sweeps)    det      1  quasi-symmetric no (4)
+o = (s, z, t, u)       table complete (5 sweeps)    det      1  quasi-symmetric no (1)
+o = (s, z, u, t)       table complete (5 sweeps)    det     -1  quasi-symmetric no (4)
+o = (t, s, u, z)       table complete (6 sweeps)    det     -1  quasi-symmetric no (1)
+o = (t, s, z, u)       table complete (5 sweeps)    det     -1  quasi-symmetric no (1)
+o = (t, u, s, z)       table complete (6 sweeps)    det      1  quasi-symmetric no (1)
+o = (t, u, z, s)       table complete (6 sweeps)    det     -1  quasi-symmetric no (1)
+o = (t, z, s, u)       table complete (5 sweeps)    det      1  quasi-symmetric no (1)
+o = (t, z, u, s)       table complete (5 sweeps)    det     -1  quasi-symmetric no (1)
+o = (u, s, t, z)       table complete (6 sweeps)    det     -1  quasi-symmetric no (1)
+o = (u, s, z, t)       table complete (6 sweeps)    det      1  quasi-symmetric no (1)
+o = (u, t, s, z)       table complete (5 sweeps)    det      1  quasi-symmetric no (1)
+o = (u, t, z, s)       table complete (6 sweeps)    det     -1  quasi-symmetric no (1)
+o = (u, z, s, t)       table complete (6 sweeps)    det      1  quasi-symmetric no (1)
+o = (u, z, t, s)       table complete (6 sweeps)    det      1  quasi-symmetric no (1)
+o = (z, s, t, u)       table complete (5 sweeps)    det      1  quasi-symmetric no (1)
+o = (z, s, u, t)       table complete (6 sweeps)    det      1  quasi-symmetric no (1)
+o = (z, t, s, u)       table complete (5 sweeps)    det      1  quasi-symmetric no (1)
+o = (z, t, u, s)       table complete (5 sweeps)    det     -1  quasi-symmetric no (1)
+o = (z, u, s, t)       table complete (6 sweeps)    det      1  quasi-symmetric no (1)
+o = (z, u, t, s)       table complete (6 sweeps)    det      1  quasi-symmetric no (1)
+                                                                                  [time 0.1 s, memory 0.76 GB]
+==== Family (3): orders of S ∪ {z} without one generator (18 orders) =========================================
+o = (t, u, z)          table complete (6 sweeps)    det      1  quasi-symmetric yes
+o = (t, z, u)          table complete (6 sweeps)    det      1  quasi-symmetric yes
+o = (u, t, z)          table complete (6 sweeps)    det     -1  quasi-symmetric yes
+o = (u, z, t)          table complete (6 sweeps)    det      1  quasi-symmetric yes
+o = (z, t, u)          table complete (6 sweeps)    det      1  quasi-symmetric yes
+o = (z, u, t)          table complete (6 sweeps)    det      1  quasi-symmetric yes
+o = (s, u, z)          table complete (6 sweeps)    det     -1  quasi-symmetric no (4)
+o = (s, z, u)          table complete (6 sweeps)    det     -1  quasi-symmetric no (4)
+o = (u, s, z)          table complete (7 sweeps)    det      1  quasi-symmetric no (4)
+o = (u, z, s)          table complete (7 sweeps)    det     -1  quasi-symmetric no (4)
+o = (z, s, u)          table complete (6 sweeps)    det      1  quasi-symmetric no (4)
+o = (z, u, s)          table complete (6 sweeps)    det      1  quasi-symmetric no (4)
+o = (s, t, z)          table complete (6 sweeps)    det      1  quasi-symmetric yes
+o = (s, z, t)          table complete (7 sweeps)    det      1  quasi-symmetric yes
+o = (t, s, z)          table complete (6 sweeps)    det      1  quasi-symmetric yes
+o = (t, z, s)          table complete (7 sweeps)    det     -1  quasi-symmetric yes
+o = (z, s, t)          table complete (7 sweeps)    det     -1  quasi-symmetric yes
+o = (z, t, s)          table complete (7 sweeps)    det     -1  quasi-symmetric yes
+                                                                                  [time 0.0 s, memory 0.76 GB]
+==== Result (mod 15013) ======================================================================================
+family (1), 6 orders: table complete 6, det = ±1 6, quasi-symmetric 0
+family (2), 24 orders: table complete 24, det = ±1 24, quasi-symmetric 0
+family (3), 18 orders: table complete 18, det = ±1 18, quasi-symmetric 12
+==============================================================================================================
+                                                                      [total time 10.5 s, peak memory 0.76 GB]
+# 2026-11-05 13:42:07  exit code 0

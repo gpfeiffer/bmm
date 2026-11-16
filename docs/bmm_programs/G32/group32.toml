@@ -1,0 +1,49 @@
+# H(G32): the group, its tower of parabolic subgroups and the basis B (engine tower; the fields are explained at the
+# top of lib/spec.jl, the tower and the stages of the records at the top of lib/tower/driver.jl)
+name         = "G32"
+order        = 155520
+engine       = "tower"                    # lib/tower: coset tables over H(P), filled by the setRow procedure of bmm.pdf §3.3
+setrow_z     = false                      # without the columns of z: the table closes without them (bmm.pdf §5.4)
+letters      = ["s1", "s2", "s3", "s4"]   # letters 1..4 = s1..s4; letter 5 = z
+orders       = [3, 3, 3, 3]
+classes      = [1, 1, 1, 1]               # one class of reflections
+params       = [["c0", "c1", "c2"]]       # T^3 = c2 T^2 + c1 T + c0; computed over R' = Z[c1, c2], c0 = 1
+chevie_group = 32
+braid        = ["1,2,1 = 2,1,2", "2,3,2 = 3,2,3", "3,4,3 = 4,3,4", "1,3 = 3,1", "1,4 = 4,1", "2,4 = 4,2"]  # type A4
+zword        = "1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4"   # z = (s1 s2 s3 s4)^5 = Delta^2, of order 6 in W
+zstep        = 6                          # B = B_P . T_X has no power of z (k = |Z(W)| = 6)
+zlevels      = 1
+pipower      = 6                          # T_pi = T_z^6
+bfs          = "1,2,3,4"                  # o: the top tree X = T_o^sigma(P\W) (Definition 5.5)
+seeds        = ["4,4,3,2,2,3,4,4,1,2,2,1,1,2,3,3,4", "4,3,3,2,4,3,3,2,1,1,2,3,3,2,4,3,3,4"]   # sigma (cosets P z^5, P z^4)
+basis        = "basis32.txt"              # X, 240 words (written by the step bfs; the proof checks it is T_o^sigma(P\W))
+table        = "cosettable32.txt"         # the setRow program that fills the table of H(W) over H(P) on X
+trace        = "0,1,0"                    # t = tau_P o E_X, the coefficient of 1 on B
+pairing      = "family32.txt"             # Y_32, Y'_32 (bmm.pdf §5.4): line "n m k" = row x_n, column comp(x_m) T_z^k
+family       = "compz"                    # its kind; --family=revz|compDelta|revDelta reads family32_<kind>.txt
+garside      = "1,2,1,3,2,1,4,3,2,1"      # Delta = s1 s2 s1 s3 s2 s1 s4 s3 s2 s1: T_Delta T_s = T_sigma(s) T_Delta and
+garside_perm = [4, 3, 2, 1]               # T_Delta^2 = T_z, so z is central (sigma = garside_perm)
+zeta         = "5,5,5"                    # condition (3) through zeta = z^3 = Delta^6 (zeta^2 = pi)
+steps        = ["bfs", "modular", "proof", "traces"]
+
+# The tower <s1> < G4 < G25 < W, bottom first; the top level is W over the last one.  Each level: name, its letters
+# (gens), the letters of the level below (over), its order, the ordering of its coset tree (bfs), and pi or zeta for condition (3).
+[[level]]                                 # the bottom: H(<s1>), basis 1, T_s1, T_s1^2
+name  = "<s1>"
+gens  = "1"
+order = 3
+[[level]]                                 # H(G4) = ⊕ H(<s1>) x_n
+name  = "G4"
+gens  = "1,2"
+over  = "1"
+order = 24
+bfs   = "1,2"
+zeta  = "1,2,1,2,1,2"                     # condition (3) through zeta = (s1 s2)^3, the z of G4 (zeta^2 = pi)
+[[level]]                                 # H(P) = ⊕ H(G4) x_n, P = G25
+name  = "G25"
+gens  = "1,2,3"
+over  = "1,2"
+order = 648
+bfs   = "1,2,3"
+pi    = "1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3"   # pi = (s1 s2 s3)^12
+zword = "1,2,3,1,2,3,1,2,3,1,2,3"         # z_P = (s1 s2 s3)^4: the units ± b z_P^j of the pairing of W

@@ -1,0 +1,40 @@
+# 2026-11-15 23:43:01  julia programs/trace_values.jl G34/group34.toml
+==============================================================================================================
+ H(G34): values of the canonical trace τ (can_trace)                        trace_values.jl, 2026-11-15 23:43 
+==============================================================================================================
+W = G34, |W| = 39191040; generators s1, s2, s3, s4, s5, s6 of order 2; s1 s2 s1 = s2 s1 s2; s1 s3 = s3 s1;
+    s1 s4 = s4 s1; s1 s5 = s5 s1; s2 s3 s2 = s3 s2 s3; s2 s4 s2 = s4 s2 s4; s2 s5 = s5 s2;
+    s3 s4 s3 = s4 s3 s4; s3 s5 = s5 s3; s4 s5 s4 = s5 s4 s5; s4 s2 s3 s4 s2 s3 = s3 s4 s2 s3 s4 s2;
+    s3 s4 s2 s3 s4 s2 = s2 s3 s4 s2 s3 s4; s5 s6 s5 = s6 s5 s6; s1 s6 = s6 s1; s2 s6 = s6 s2; s3 s6 = s6 s3;
+    s4 s6 = s6 s4
+T_s1² = e1 T_s1 + e0 (same for T_s2, T_s3, T_s4, T_s5, T_s6)
+tower 1 < <s1> < <s1, s2> < <s1, s2, s4> < <s1, s2, s4, s5> < <s1, s2, s3, s4, s5> < W (engine tower);
+    z = s1 s2 s3 s4 s5 s6 s1 s2 s3 s4 s5 s6 s1 s2 s3 s4 s5 s6 s1 s2 s3 s4 s5 s6 s1 s2 s3 s4 s5 s6 s1 s2 s3 s4 s5 s6 s1 s2 s3 s4 s5 s6;
+    π = z⁶
+==== Coset table of A ========================================================================================
+H(A2) = ⊕ H(<s1>) x_n: 3 cosets, the table closes by the setRow procedure (bmm.pdf §3.3); rank 6
+H(A3) = ⊕ H(A2) x_n: 4 cosets, the table closes by the setRow procedure (bmm.pdf §3.3); rank 24
+H(A4) = ⊕ H(A3) x_n: 5 cosets, the table closes by the setRow procedure (bmm.pdf §3.3); rank 120
+H(G33) = ⊕ H(A4) x_n: 432 cosets, the table closes by the setRow procedure (bmm.pdf §3.3); rank 51840
+H(G34) = ⊕ H(P) x_n: 756 cosets, the table completed by the exact execution of the 8307 lines of cosettable34.txt  [19 min 26 s, 7.03 GB]
+testing T_z is central: T_z T_s = T_s T_z for s = s1, s2, s3, s4, s5, s6 ... true
+                                                                            [time 19 min 16 s, memory 7.03 GB]
+==== Values of τ =============================================================================================
+exact values in R = Z[e1][e0^±1] (computed with e0 = 1, lifted by degree)
+τ(T_s1⁻²) = e0^-1 + e0^-2*e1^2
+τ(T_s1⁻¹) = -e0^-1*e1
+τ(T_s1) = 0
+τ(T_s1²) = e0
+τ(T_s1 T_s2) = 0
+τ(T_s1 T_s2⁻¹) = 0
+τ(T_s1⁻¹ T_s2⁻¹) = e0^-2*e1^2
+τ(T_s1 T_s2 T_s3 T_s4 T_s5 T_s6) = 0
+τ(T_z) = 0
+τ(T_z⁻¹) = 9072*e0^-26*e1^10 + 99576*e0^-27*e1^12 + 541863*e0^-28*e1^14 + 1818012*e0^-29*e1^16 +
+    4080973*e0^-30*e1^18 + 6433344*e0^-31*e1^20 + 7360524*e0^-32*e1^22 + 6250620*e0^-33*e1^24 +
+    3996387*e0^-34*e1^26 + 1937544*e0^-35*e1^28 + 712531*e0^-36*e1^30 + 197316*e0^-37*e1^32 +
+    40455*e0^-38*e1^34 + 5952*e0^-39*e1^36 + 594*e0^-40*e1^38 + 36*e0^-41*e1^40 + e0^-42*e1^42
+τ(T_s1 T_s2 T_s1⁻¹) = 0
+==============================================================================================================
+                                                                 [total time 24 min 03 s, peak memory 8.47 GB]
+# 2026-11-16 00:06:54  exit code 0

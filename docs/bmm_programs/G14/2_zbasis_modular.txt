@@ -1,0 +1,48 @@
+# 2026-11-05 13:42:27  julia programs/zbasis_modular.jl G14
+==============================================================================================================
+ H(G14): the z-basis B tested modulo p (bmm.pdf, Section 4)               zbasis_modular.jl, 2026-11-05 13:42 
+==============================================================================================================
+W = G14, |W| = 144; generators s, t of orders 2, 3; s t s t s t s t = t s t s t s t s
+T_s² = e1 T_s + e0; T_t³ = c2 T_t² + c1 T_t + c0
+U = <t>, e = 3, 48 cosets; z = s t s t s t s t; π = z⁶
+A = BFS_(s, t) (cosettable14.txt); B = { T_z^j T_t^m T_x : j < 6, m < 3, x in X }, |X| = 8 (basis14.txt)
+p = 15013; e1 = 11; c1, c2 = 13, 17; e0 = c0 = 1
+==== Coset table of A and CBM(A, B) (Lemma 2.6) ==============================================================
+testing the 192 setRow's of cosettable14.txt compile and the relations of H hold ... true
+testing det CBM(A, B) = ±1 ... true (det = -1)
+                                                                                  [time 2.1 s, memory 0.74 GB]
+==== τ_B in the basis A: φ_j(h) = τ_B(T_z^j h), [a] = coefficient of a in A ==================================
+φ_0: 1 coordinate = [1]
+φ_1: 1 coordinate = [T_t² T_(w_37)]
+φ_2: 1 coordinate = [T_t² T_(w_48)]
+φ_3: 1 coordinate = [T_t² T_(w_46)]
+φ_4: 3 coordinates = [T_t² T_(w_43)] + (17)[T_t T_(w_48)] + (578)[T_t² T_(w_48)]
+φ_5: 70 coordinates
+trace = "0,1,0"
+testing the trace "0,1,0" of the group file gives τ_B ... true
+τ_B(a) = δ_(a,1) on A: yes (τ_B = τ_A)
+                                                                                  [time 1.0 s, memory 0.74 GB]
+==== Proposition 4.17 and Theorem 4.18 at the point (t = can_trace) ==========================================
+testing t(a T_s) = t(T_s a) for all a in A ... true
+testing t(a T_t) = t(T_t a) for all a in A ... true
+testing t(b) = δ_(b,1) for all b in B ... true
+testing F_1 = 0 ... true
+testing F_2 = 0 ... true
+testing F_3 = 0 ... true
+testing F_4 = 0 ... true
+testing F_5 = 0 ... true
+testing det F_0 = ±1 ... true (det = 1; F_0 is 24 x 24)
+testing t(b⁻¹ T_π) = 0 for all b ≠ 1 in B ... true
+testing t(T_π) = 1 ... true
+                                                                                  [time 1.2 s, memory 0.74 GB]
+==== Gram matrices at the point ==============================================================================
+testing Gram_t(B, B) is symmetric ... true
+testing det Gram_t(B, B⁻¹) = ±1 ... true (det = 1)
+testing det Gram_t(B, B) = ±1 ... true (det = -1)
+                                                                                  [time 0.1 s, memory 0.74 GB]
+==== Result (mod 15013) ======================================================================================
+all 17 tests true
+predicted: det Gram(τ_B) = - c0^1128 e0^1656
+==============================================================================================================
+                                                                      [total time 11.9 s, peak memory 0.74 GB]
+# 2026-11-05 13:42:31  exit code 0

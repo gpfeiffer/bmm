@@ -1,0 +1,21 @@
+# H(G29): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G29"
+order        = 7680
+letters      = ["s1", "s2", "s3", "s4"]   # letter 1 = s1, ..., 4 = s4; letter 5 = z
+orders       = [2, 2, 2, 2]
+classes      = [1, 1, 1, 1]               # one class of reflections
+params       = [["e0", "e1"]]             # T^2 = e1 T + e0, constant term first (e0 invertible)
+chevie_group = 29
+chevie       = [1, 2, 3, 4]
+braid        = ["1,2,1 = 2,1,2", "2,4,2 = 4,2,4", "3,4,3 = 4,3,4", "2,3,2,3 = 3,2,3,2", "1,3 = 3,1", "1,4 = 4,1",
+                "4,3,2,4,3,2 = 3,2,4,3,2,4"]
+parabolic    = 1                          # U = <s1>
+zword        = "1,2,4,3,1,2,4,3,1,2,4,3,1,2,4,3,1,2,4,3"   # z = (s1 s2 s4 s3)^5, central of order 4
+zstep        = 1
+zlevels      = 4
+pipower      = 4                          # T_pi = T_z^4
+bfs          = "1,2,3,4"
+basis        = "basis29.txt"
+table        = "cosettable29.txt"
+trace        = "0,1,0"                    # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h
+bmm_table    = "+e0^306048"

@@ -1,0 +1,19 @@
+# H(G13): the group, the BFS basis A and the z^k-basis B (the fields are explained at the top of lib/spec.jl)
+name         = "G13"
+order        = 96
+letters      = ["s", "t", "u"]     # letter 1 = s, 2 = t, 3 = u; letter 4 = z
+orders       = [2, 2, 2]
+classes      = [1, 2, 2]                     # 2 classes of reflections: {s}, {t, u}
+params       = [["e0", "e1"], ["f0", "f1"]]   # T^k = r_(k-1) T^(k-1) + ... + r_0 for each class, constant term first (invertible)
+chevie_group = 13
+chevie       = [1, 2, 3]
+braid        = ["3,1,2,3 = 2,3,1,2", "1,2,3,1,2 = 3,1,2,3,1"]   # u s t u = t u s t, s t u s t = u s t u s
+parabolic    = 1                          # U = <s>
+zword        = "1,2,3,1,2,3,1,2,3"         # z = (s t u)^3 = (s t u s t)(u s t u), central of order 4
+zstep        = 1
+zlevels      = 4
+pipower      = 4                          # T_pi = T_z^4
+bfs          = "2,3,1"                    # the order o = (t, u, s) of BFS_o; BFS_o is quasi-symmetric
+basis        = "basis13.txt"
+table        = "cosettable13.txt"
+trace        = "0,1,0"                    # (J,i,m) of E_j (bmm.pdf §4.3; Table 1): τ(T_z^(kJ) h) = coefficient of T_u^m T_(w_i) in h
